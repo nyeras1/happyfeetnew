@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
@@ -8,49 +8,42 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/packages", label: "Packages" },
+    { href: "/destinations", label: "Destinations" },
     { href: "/gallery", label: "Gallery" },
     { href: "/about", label: "About Us" },
     { href: "/contact", label: "Contact" },
   ]
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4 md:px-8 flex justify-center pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 flex justify-center pointer-events-none">
+      <Link
+        href="/"
+        className="pointer-events-auto absolute left-0 top-0 z-[60] flex items-center hover:scale-105 transition-all duration-500"
+      >
+        <div className="relative h-10 w-36 sm:h-12 sm:w-52 md:h-16 md:w-[11rem] origin-top-left scale-[2]">
+          <Image
+            src="/logo-CZBEvsvV.png"
+            alt="Happy Feet Holidays & Resorts logo"
+            fill
+            className="object-contain drop-shadow-md"
+            priority
+          />
+        </div>
+      </Link>
+
       <nav
         className={cn(
-          "w-full max-w-7xl h-20 rounded-full transition-all duration-700 ease-out flex items-center justify-between px-6 md:px-12",
+          "mt-4 w-full max-w-5xl h-20 rounded-full flex items-center justify-between px-6 md:px-12",
+          "relative z-50",
           "glass-morphism-strong shadow-3d pointer-events-auto",
           "border-2 border-white/20",
-          isScrolled
-            ? "scale-[0.98] shadow-3d-hover backdrop-blur-3xl bg-white/10"
-            : "scale-100 backdrop-blur-2xl bg-white/5",
+          "backdrop-blur-3xl bg-white/10",
         )}
       >
-        {/* Logo image */}
-        <Link href="/" className="flex items-center gap-3 hover:scale-105 transition-all duration-500">
-          <div className="relative h-16 w-80 md:h-20 md:w-[22rem]">
-            <Image
-              src="/logo-CZBEvsvV.png"
-              alt="Happy Feet Holidays & Resorts logo"
-              fill
-              className="object-contain drop-shadow-md"
-              priority
-            />
-          </div>
-        </Link>
 
         {/* Desktop Links with maximum readability */}
         <div className="hidden lg:flex items-center gap-12">
@@ -59,7 +52,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-300",
+                "font-[var(--font-nav)] text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-300",
                 "text-white/90 hover:text-white hover:scale-110",
                 "relative after:absolute after:bottom-[-6px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-1",
                 "after:bg-accent after:rounded-full after:transition-all after:duration-500 hover:after:w-4",
@@ -104,7 +97,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-6 py-4 text-white font-semibold hover:bg-white/10 rounded-2xl transition-all text-shadow-strong"
+                  className="font-[var(--font-nav)] px-6 py-4 text-white font-semibold hover:bg-white/10 rounded-2xl transition-all text-shadow-strong"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}

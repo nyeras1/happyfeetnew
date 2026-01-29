@@ -1,135 +1,96 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useRef, useState } from "react"
+import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, MapPin } from "lucide-react"
+import { HeroScrollCanvas } from "@/components/hero-scroll-canvas"
 
 export function HeroSection() {
-  const [offsetY, setOffsetY] = useState(0)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const handleScroll = () => setOffsetY(window.pageYOffset)
+  // Track scroll progress of the container (0 to 1)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  })
 
-  const handleMouseMove = (e: MouseEvent) => {
-    setMousePosition({
-      x: (e.clientX / window.innerWidth - 0.5) * 20,
-      y: (e.clientY / window.innerHeight - 0.5) * 20,
-    })
-  }
+  // Transform scroll progress for different text animations
+  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 0, 0])
+  const y1 = useTransform(scrollYProgress, [0, 0.2], [0, -50])
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [])
+  const opacity2 = useTransform(scrollYProgress, [0.3, 0.4, 0.6, 0.7], [0, 1, 1, 0])
+  const scale2 = useTransform(scrollYProgress, [0.3, 0.6], [0.9, 1.1])
+
+  const opacity3 = useTransform(scrollYProgress, [0.7, 0.8, 1], [0, 1, 1])
+  const y3 = useTransform(scrollYProgress, [0.7, 1], [50, 0])
+
+  const [currentProgress, setCurrentProgress] = useState(0)
+
+  useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
+    setCurrentProgress(latest)
+  })
 
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center pt-32 md:pt-40 perspective-1500">
-      {/* Multi-layer 3D Background */}
-      <div
-        className="absolute inset-0 z-0 scale-110 preserve-3d"
-        style={{
-          transform: `translateZ(-200px) translateY(${offsetY * 0.5}px) rotateX(${mousePosition.y * 0.02}deg) rotateY(${mousePosition.x * 0.02}deg)`,
-          backgroundImage: `url('https://images.unsplash.com/photo-1506929113614-bb48858a6771?auto=format&fit=crop&q=80&w=2400')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 gradient-overlay-dark" />
-      </div>
+    <div ref={containerRef} className="relative h-[600vh] bg-black">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <HeroScrollCanvas scrollProgress={currentProgress} />
 
-      {/* Floating 3D Decorative Elements */}
-      <div
-        className="absolute top-[15%] right-[10%] w-64 h-64 rounded-full bg-accent/20 blur-3xl animate-float-slow preserve-3d"
-        style={{ transform: `translateZ(100px) translateX(${mousePosition.x * 2}px)` }}
-      />
-      <div
-        className="absolute bottom-[20%] left-[8%] w-96 h-96 rounded-full bg-primary/20 blur-3xl animate-float preserve-3d"
-        style={{ transform: `translateZ(50px) translateX(${mousePosition.x * -1.5}px)` }}
-      />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
 
-      {/* Hero Content with 3D depth */}
-      <div
-        className="container relative z-20 px-4 text-center preserve-3d mt-24 md:mt-28"
-        style={{
-          transform: `translateY(${offsetY * -0.3}px) translateZ(100px)`,
-        }}
-      >
-        <div className="max-w-5xl mx-auto space-y-12">
-          {/* Main Heading with dramatic 3D text */}
-          <h1
-            className="text-6xl md:text-8xl lg:text-9xl font-serif font-black leading-[0.9] tracking-tight text-high-contrast animate-fade-in"
-            style={{ animationDelay: "0.4s" }}
-          >
-            Travel the
-            <br />
-            <span className="text-accent italic">World</span> with
-            <br />
-            Happy Feet
-          </h1>
+        <motion.div
+          style={{ opacity: opacity1, y: y1 }}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+        >
+          <div className="max-w-5xl space-y-8">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-black leading-[0.9] tracking-tight text-white drop-shadow-2xl">
+              Travel the <br />
+              <span className="text-accent italic">World</span> with <br />
+              Happy Feet
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light tracking-wide">
+              Drag down to begin your journey.
+            </p>
+          </div>
+        </motion.div>
 
-          {/* Subtitle */}
-          <p
-            className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed text-shadow-strong animate-fade-in"
-            style={{ animationDelay: "0.6s" }}
-          >
-            Discover extraordinary destinations, curated experiences, and unforgettable memories. Your journey to joy
-            starts here.
-          </p>
+        <motion.div
+          style={{ opacity: opacity2, scale: scale2 }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <h2 className="text-5xl md:text-7xl font-bold text-white tracking-widest uppercase text-shadow-strong text-center px-4">
+            One World.<br />Endless Paths.
+          </h2>
+        </motion.div>
 
-          {/* CTAs with 3D effects */}
-          <div
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8 animate-fade-in"
-            style={{ animationDelay: "0.8s" }}
-          >
+        <motion.div
+          style={{ opacity: opacity3, y: y3 }}
+          className="absolute inset-0 flex flex-col items-center justify-center z-10"
+        >
+          <h2 className="text-5xl md:text-7xl font-sans font-bold text-white mb-8 tracking-tighter shadow-black drop-shadow-lg text-center">
+            Travel beyond <br />destinations.
+          </h2>
+          <div className="flex flex-col sm:flex-row gap-6">
             <Button
               size="lg"
-              className="h-16 px-10 rounded-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold uppercase tracking-wider text-base shadow-3d hover:shadow-3d-hover hover:scale-105 transition-all duration-300 hover:-translate-y-1 group"
+              className="h-14 px-8 rounded-full bg-white text-black hover:bg-white/90 font-bold uppercase tracking-widest text-sm shadow-xl hover:scale-105 transition-transform"
             >
-              Explore Packages
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-16 px-10 rounded-full glass-morphism-strong border-2 border-white/30 text-white hover:bg-white hover:text-background font-bold uppercase tracking-wider text-base shadow-3d hover:shadow-3d-hover hover:scale-105 transition-all duration-300 bg-transparent"
-            >
-              <MapPin className="mr-2 h-5 w-5" />
-              View Destinations
+              Start Exploring
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
+        </motion.div>
 
-          {/* Stats Bar with 3D cards */}
-          <div
-            className="grid grid-cols-3 gap-6 max-w-3xl mx-auto pt-4 animate-fade-in"
-            style={{ animationDelay: "1s" }}
-          >
-            {[
-              { value: "50+", label: "Destinations" },
-              { value: "10K+", label: "Happy Travelers" },
-              { value: "15+", label: "Years Experience" },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="glass-morphism-strong rounded-2xl p-6 border-2 border-white/10 shadow-3d hover:shadow-3d-hover hover:scale-105 hover:-translate-y-2 transition-all duration-300 preserve-3d"
-              >
-                <p className="text-3xl md:text-4xl font-bold text-accent mb-2">{stat.value}</p>
-                <p className="text-sm font-semibold text-white/80 uppercase tracking-wider">{stat.label}</p>
-              </div>
-            ))}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <div className="w-[1px] h-16 bg-white/20">
+            <motion.div
+              style={{ height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
+              className="w-full bg-accent"
+            />
           </div>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-white/50">Scroll</span>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <div className="w-8 h-12 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 bg-white rounded-full animate-pulse" />
-        </div>
-      </div>
-    </section>
+    </div>
   )
 }

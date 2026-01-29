@@ -59,7 +59,7 @@ export function PopularPackages() {
         </div>
 
         {/* Package Cards with enhanced 3D and visibility */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 perspective-1000">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-1000">
           {packages.map((pkg, i) => (
             <div
               key={i}

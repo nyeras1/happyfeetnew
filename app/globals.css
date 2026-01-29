@@ -360,3 +360,30 @@
     transform: skewX(0deg) rotate(0deg);
   }
 }
+
+.hf-marquee {
+  --hf-marquee-duration: 55s;
+}
+
+.hf-marquee-track {
+  animation: hf-marquee var(--hf-marquee-duration) linear infinite;
+}
+
+.hf-marquee:hover .hf-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hf-marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes hf-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}

@@ -1,0 +1,126 @@
+"use client"
+
+import { useEffect, useRef, useState } from "react"
+
+interface HeroScrollCanvasProps {
+    scrollProgress: number
+}
+
+export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const [images, setImages] = useState<HTMLImageElement[]>([])
+    const [isLoaded, setIsLoaded] = useState(false)
+    const totalFrames = 170
+
+    // Preload images
+    useEffect(() => {
+        let loadedCount = 0
+        const imageArray: HTMLImageElement[] = []
+        const imageUrls = Array.from({ length: totalFrames }, (_, i) => {
+            const frameNum = (i + 1).toString().padStart(3, "0")
+            return `/travel images/ezgif-frame-${frameNum}.jpg`
+        })
+
+        const onImageLoad = () => {
+            loadedCount++
+            if (loadedCount === totalFrames) {
+                setIsLoaded(true)
+                setImages(imageArray)
+            }
+        }
+
+        imageUrls.forEach((url) => {
+            const img = new Image()
+            img.src = url
+            img.onload = onImageLoad
+            img.onerror = () => {
+                // Fallback or skip
+                loadedCount++
+                if (loadedCount === totalFrames) {
+                    setIsLoaded(true)
+                    setImages(imageArray)
+                }
+            }
+            imageArray.push(img)
+        })
+    }, [])
+
+    // Draw to canvas
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas || !isLoaded || images.length === 0) return
+
+        const ctx = canvas.getContext("2d")
+        if (!ctx) return
+
+        const render = () => {
+            // Calculate frame index
+            const frameIndex = Math.min(
+                totalFrames - 1,
+                Math.max(0, Math.floor(scrollProgress * totalFrames))
+            )
+
+            const img = images[frameIndex]
+            if (!img) return
+
+            // Handle high-DPI displays
+            const dpr = window.devicePixelRatio || 1
+            const rect = canvas.getBoundingClientRect()
+
+            // Update canvas size to match physical pixels if needed
+            if (canvas.width !== rect.width * dpr || canvas.height !== rect.height * dpr) {
+                canvas.width = rect.width * dpr
+                canvas.height = rect.height * dpr
+            }
+
+            const canvasWidth = canvas.width
+            const canvasHeight = canvas.height
+
+            // Calculate object-fit: cover
+            const imgRatio = img.width / img.height
+            const canvasRatio = canvasWidth / canvasHeight
+
+            let drawWidth, drawHeight, offsetX, offsetY
+
+            if (imgRatio > canvasRatio) {
+                // Image is wider than canvas -> Constrain height
+                drawHeight = canvasHeight
+                drawWidth = canvasHeight * imgRatio
+                offsetX = (canvasWidth - drawWidth) / 2
+                offsetY = 0
+            } else {
+                // Image is taller than canvas -> Constrain width
+                drawWidth = canvasWidth
+                drawHeight = canvasWidth / imgRatio
+                offsetX = 0
+                offsetY = (canvasHeight - drawHeight) / 2
+            }
+
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+            ctx.imageSmoothingEnabled = true
+            ctx.imageSmoothingQuality = 'high'
+            ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
+        }
+
+        render()
+
+        // Add resize listener specific to this effect to ensure re-render on resize
+        // We bind local render function so it uses latest scope variables
+        const handleResize = () => {
+            window.requestAnimationFrame(render)
+        }
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+
+    }, [scrollProgress, isLoaded, images])
+
+
+    return (
+        <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full object-cover bg-black"
+            style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
+        />
+    )
+}
