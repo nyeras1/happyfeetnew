@@ -36,7 +36,7 @@ export function PopularPackages() {
   ]
 
   return (
-    <section className="py-32 relative overflow-hidden bg-gradient-to-b from-background to-card">
+    <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-background to-card">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-40 left-20 w-96 h-96 bg-accent rounded-full blur-3xl animate-float" />
@@ -50,10 +50,10 @@ export function PopularPackages() {
             <Tag className="h-4 w-4 text-accent" />
             <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">The Collection</span>
           </div>
-          <h3 className="text-6xl md:text-8xl font-serif font-bold tracking-tighter text-high-contrast">
+          <h3 className="text-4xl sm:text-6xl md:text-8xl font-serif font-bold tracking-tighter text-high-contrast">
             Curated Escapes
           </h3>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">
             Handpicked experiences designed to create unforgettable memories
           </p>
         </div>
@@ -63,7 +63,7 @@ export function PopularPackages() {
           {packages.map((pkg, i) => (
             <div
               key={i}
-              className={`group relative h-[650px] rounded-3xl overflow-hidden shadow-3d hover:shadow-3d-hover border-2 border-white/10 transition-all duration-700 preserve-3d ${
+              className={`group relative h-[520px] sm:h-[650px] rounded-3xl overflow-hidden shadow-3d hover:shadow-3d-hover border-2 border-white/10 transition-all duration-700 preserve-3d ${
                 hoveredIndex === i ? "scale-[1.03] -translate-y-6" : "scale-100"
               }`}
               onMouseEnter={() => setHoveredIndex(i)}
@@ -88,7 +88,7 @@ export function PopularPackages() {
               </div>
 
               {/* Content with maximum readability */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                 {/* Info badges */}
                 <div className="flex gap-3 mb-6">
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-morphism-strong border border-white/20">
@@ -102,14 +102,14 @@ export function PopularPackages() {
                 </div>
 
                 {/* Title with strong shadow */}
-                <h4 className="text-4xl font-serif font-bold mb-4 text-white text-shadow-strong leading-tight">
+                <h4 className="text-3xl sm:text-4xl font-serif font-bold mb-4 text-white text-shadow-strong leading-tight">
                   {pkg.title}
                 </h4>
 
                 {/* Price with high contrast */}
                 <div className="flex items-baseline gap-2 mb-6">
                   <span className="text-sm text-white/80 font-semibold uppercase tracking-wider">From</span>
-                  <span className="text-4xl font-bold text-accent">{pkg.price}</span>
+                  <span className="text-3xl sm:text-4xl font-bold text-accent">{pkg.price}</span>
                   <span className="text-sm text-white/80 font-semibold">per person</span>
                 </div>
 

@@ -128,7 +128,7 @@ export default function DestinationsPage() {
   }
 
   return (
-    <div className="min-h-screen pt-32 pb-24 bg-muted/30">
+    <div className="min-h-screen pt-28 sm:pt-32 pb-20 sm:pb-24 bg-muted/30">
       <div className="container px-4 mx-auto">
         <section className="mb-24 md:mb-28">
           <div className="text-center space-y-4 mb-12">
@@ -136,7 +136,7 @@ export default function DestinationsPage() {
               <Sparkles className="h-4 w-4 text-accent" />
               <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">Choose Your Travel Tribe</span>
             </div>
-            <h3 className="text-4xl md:text-5xl font-serif font-bold text-high-contrast">Choose Your Travel Tribe</h3>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-high-contrast">Choose Your Travel Tribe</h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Pick your vibe — we’ll tailor hotels, pacing, and experiences to match.
             </p>
@@ -170,7 +170,7 @@ export default function DestinationsPage() {
                       onMouseEnter={() => setActiveTribeId(card.id)}
                       onFocus={() => setActiveTribeId(card.id)}
                       className={
-                        "group relative rounded-[2.5rem] p-8 md:p-10 text-left overflow-hidden transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-accent " +
+                        "group relative rounded-[2.5rem] p-6 sm:p-8 md:p-10 text-left overflow-hidden transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-accent " +
                         (isActive
                           ? "shadow-3d-hover border-2 border-accent/40 bg-white/10 scale-[1.02]"
                           : "shadow-3d border-2 border-white/10 bg-white/5 hover:bg-white/10 hover:-translate-y-1")
@@ -198,7 +198,7 @@ export default function DestinationsPage() {
 
                       <div className="relative">
                         <p className="text-xs font-black tracking-[0.35em] uppercase text-white/70 mb-3">Travel Tribe</p>
-                        <h4 className="text-3xl md:text-4xl font-serif font-bold text-white text-shadow-strong">{card.title}</h4>
+                        <h4 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white text-shadow-strong">{card.title}</h4>
                         <p className="mt-4 text-sm md:text-base text-white/80 leading-relaxed max-w-sm">
                           {card.id === "solo" && "Freedom to explore, flexible plans, and personal bucket-list moments."}
                           {card.id === "couple" && "Romantic stays, scenic dinners, and slow, beautiful days together."}
@@ -235,13 +235,13 @@ export default function DestinationsPage() {
               <Sparkles className="h-4 w-4 text-accent" />
               <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">Hot Picks</span>
             </div>
-            <h3 className="text-4xl md:text-5xl font-serif font-bold">Signature Packages</h3>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold">Signature Packages</h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Curated highlights only. For exact itinerary and best pricing, request details.
             </p>
           </div>
 
-          <div ref={resultsRef} className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div ref={resultsRef} className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
             {filteredPackages.map((pkg, index) => (
               <div
                 key={`${pkg.title}-${pkg.duration}-${revealNonce}`}
@@ -277,9 +277,9 @@ export default function DestinationsPage() {
                   </div>
                 </div>
 
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <h4 className="text-white text-4xl font-serif font-bold mb-3 leading-tight">{pkg.title}</h4>
-                  <p className="text-white/90 text-base leading-relaxed mb-5 max-w-xl">{pkg.tagline}</p>
+                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                  <h4 className="text-white text-3xl sm:text-4xl font-serif font-bold mb-3 leading-tight">{pkg.title}</h4>
+                  <p className="text-white/90 text-sm sm:text-base leading-relaxed mb-5 max-w-xl">{pkg.tagline}</p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
                     {pkg.highlights.map((h) => (
@@ -318,15 +318,15 @@ export default function DestinationsPage() {
         <div id="package-inquiry" className="mt-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
             <div className="lg:col-span-5">
-              <div className="glass-morphism-strong p-10 rounded-[3rem] shadow-3d border-2 border-white/10 space-y-6 h-full">
+              <div className="glass-morphism-strong p-6 sm:p-8 md:p-10 rounded-[3rem] shadow-3d border-2 border-white/10 space-y-6 h-full">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-morphism border border-white/10 w-fit">
                   <Send className="h-4 w-4 text-accent" />
                   <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">Quick Inquiry</span>
                 </div>
-                <h3 className="text-4xl md:text-5xl font-serif font-bold text-high-contrast leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-high-contrast leading-tight">
                   Get pricing & availability
                 </h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                   Share your preferred package and travel month. We’ll call you back with the best options, inclusions,
                   and special deals.
                 </p>
@@ -359,7 +359,7 @@ export default function DestinationsPage() {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="glass-morphism-strong p-10 md:p-14 rounded-[4rem] shadow-3d border-2 border-white/10">
+              <div className="glass-morphism-strong p-6 sm:p-8 md:p-14 rounded-[4rem] shadow-3d border-2 border-white/10">
                 <h3 className="text-3xl md:text-4xl font-serif font-bold text-high-contrast mb-10">Request Call Back</h3>
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={handleInquirySubmit}>
                   <div className="space-y-3">
@@ -370,7 +370,7 @@ export default function DestinationsPage() {
                       name="name"
                       required
                       placeholder="Enter your name"
-                      className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                      className="rounded-2xl h-14 sm:h-16 bg-background/50 border-white/20 focus:border-accent text-base sm:text-lg"
                     />
                   </div>
                   <div className="space-y-3">
@@ -381,7 +381,7 @@ export default function DestinationsPage() {
                       name="phone"
                       required
                       placeholder="Your phone number"
-                      className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                      className="rounded-2xl h-14 sm:h-16 bg-background/50 border-white/20 focus:border-accent text-base sm:text-lg"
                     />
                   </div>
                   <div className="space-y-3">
@@ -393,7 +393,7 @@ export default function DestinationsPage() {
                       type="email"
                       required
                       placeholder="your@email.com"
-                      className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                      className="rounded-2xl h-14 sm:h-16 bg-background/50 border-white/20 focus:border-accent text-base sm:text-lg"
                     />
                   </div>
                   <div className="space-y-3">
@@ -403,7 +403,7 @@ export default function DestinationsPage() {
                     <Input
                       name="month"
                       placeholder="e.g., March 2026"
-                      className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                      className="rounded-2xl h-14 sm:h-16 bg-background/50 border-white/20 focus:border-accent text-base sm:text-lg"
                     />
                   </div>
                   <div className="md:col-span-2 space-y-3">
@@ -412,7 +412,7 @@ export default function DestinationsPage() {
                       name="package"
                       value={selectedPackage}
                       onChange={(e) => setSelectedPackage(e.target.value)}
-                      className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                      className="rounded-2xl h-14 sm:h-16 bg-background/50 border-white/20 focus:border-accent text-base sm:text-lg"
                     />
                   </div>
                   <div className="md:col-span-2 space-y-3">
@@ -422,7 +422,7 @@ export default function DestinationsPage() {
                     <Textarea
                       name="message"
                       placeholder="Budget range, number of travelers, hotel type, or any preferences..."
-                      className="rounded-3xl min-h-[170px] bg-background/50 border-white/20 focus:border-accent text-lg p-6"
+                      className="rounded-3xl min-h-[170px] bg-background/50 border-white/20 focus:border-accent text-base sm:text-lg p-6"
                     />
                   </div>
                   <div className="md:col-span-2 pt-2">

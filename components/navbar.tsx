@@ -20,24 +20,9 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 flex justify-center pointer-events-none">
-      <Link
-        href="/"
-        className="pointer-events-auto absolute left-0 top-0 z-[60] flex items-center hover:scale-105 transition-all duration-500"
-      >
-        <div className="relative h-10 w-36 sm:h-12 sm:w-52 md:h-16 md:w-[11rem] origin-top-left scale-[2]">
-          <Image
-            src="/logo-CZBEvsvV.png"
-            alt="Happy Feet Holidays & Resorts logo"
-            fill
-            className="object-contain drop-shadow-md"
-            priority
-          />
-        </div>
-      </Link>
-
       <nav
         className={cn(
-          "mt-4 w-full max-w-5xl h-20 rounded-full flex items-center justify-between px-6 md:px-12",
+          "mt-4 w-full max-w-5xl h-16 md:h-20 rounded-full flex items-center justify-between px-4 sm:px-6 md:px-12",
           "relative z-50",
           "glass-morphism-strong shadow-3d pointer-events-auto",
           "border-2 border-white/20",
@@ -45,8 +30,24 @@ export function Navbar() {
         )}
       >
 
+        <Link
+          href="/"
+          className="flex items-center gap-3 shrink-0 hover:opacity-95 transition-opacity"
+          aria-label="Happy Feet Holidays & Resorts"
+        >
+          <div className="relative h-9 w-28 sm:h-10 sm:w-36 md:h-12 md:w-44">
+            <Image
+              src="/logo-CZBEvsvV.png"
+              alt="Happy Feet Holidays & Resorts logo"
+              fill
+              className="object-contain drop-shadow-md"
+              priority
+            />
+          </div>
+        </Link>
+
         {/* Desktop Links with maximum readability */}
-        <div className="hidden lg:flex items-center gap-12">
+        <div className="hidden lg:flex items-center justify-center gap-10 xl:gap-12 flex-1 min-w-0">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -65,7 +66,7 @@ export function Navbar() {
         </div>
 
         {/* CTA Button with immersive 3D styling */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6 shrink-0">
           <Button
             variant="outline"
             className={cn(

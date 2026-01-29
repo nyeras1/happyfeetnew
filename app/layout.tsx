@@ -48,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${poppins.variable} font-sans antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${poppins.variable} font-sans antialiased overflow-x-hidden`}>
         <AppShell>
           <Navbar />
           <main>{children}</main>

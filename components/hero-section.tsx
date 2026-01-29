@@ -40,15 +40,15 @@ export function HeroSection() {
 
         <motion.div
           style={{ opacity: opacity1, y: y1 }}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-24 sm:pt-28 md:pt-0"
         >
-          <div className="max-w-5xl space-y-8">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-black leading-[0.9] tracking-tight text-white drop-shadow-2xl">
+          <div className="max-w-5xl space-y-5 sm:space-y-8">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif font-black leading-[0.95] sm:leading-[0.9] tracking-tight text-white drop-shadow-2xl">
               Travel the <br />
               <span className="text-accent italic">World</span> with <br />
               Happy Feet
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light tracking-wide">
+            <p className="text-base sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light tracking-wide">
               Drag down to begin your journey.
             </p>
           </div>
@@ -56,18 +56,18 @@ export function HeroSection() {
 
         <motion.div
           style={{ opacity: opacity2, scale: scale2 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none pt-24 sm:pt-28 md:pt-0"
         >
-          <h2 className="text-5xl md:text-7xl font-bold text-white tracking-widest uppercase text-shadow-strong text-center px-4">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white tracking-[0.25em] sm:tracking-widest uppercase text-shadow-strong text-center px-4">
             One World.<br />Endless Paths.
           </h2>
         </motion.div>
 
         <motion.div
           style={{ opacity: opacity3, y: y3 }}
-          className="absolute inset-0 flex flex-col items-center justify-center z-10"
+          className="absolute inset-0 flex flex-col items-center justify-center z-10 pt-24 sm:pt-28 md:pt-0"
         >
-          <h2 className="text-5xl md:text-7xl font-sans font-bold text-white mb-8 tracking-tighter shadow-black drop-shadow-lg text-center">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-sans font-bold text-white mb-8 tracking-tighter shadow-black drop-shadow-lg text-center px-4">
             Travel beyond <br />destinations.
           </h2>
           <div className="flex flex-col sm:flex-row gap-6">

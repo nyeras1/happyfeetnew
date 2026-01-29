@@ -10,7 +10,18 @@ export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [images, setImages] = useState<HTMLImageElement[]>([])
     const [isLoaded, setIsLoaded] = useState(false)
+    const [fitMode, setFitMode] = useState<"cover" | "contain">("cover")
     const totalFrames = 170
+
+    useEffect(() => {
+        const updateFit = () => {
+            setFitMode(window.innerWidth < 640 ? "contain" : "cover")
+        }
+
+        updateFit()
+        window.addEventListener("resize", updateFit)
+        return () => window.removeEventListener("resize", updateFit)
+    }, [])
 
     // Preload images
     useEffect(() => {
@@ -76,24 +87,41 @@ export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
             const canvasWidth = canvas.width
             const canvasHeight = canvas.height
 
-            // Calculate object-fit: cover
+            // Calculate object-fit
             const imgRatio = img.width / img.height
             const canvasRatio = canvasWidth / canvasHeight
 
             let drawWidth, drawHeight, offsetX, offsetY
 
-            if (imgRatio > canvasRatio) {
-                // Image is wider than canvas -> Constrain height
-                drawHeight = canvasHeight
-                drawWidth = canvasHeight * imgRatio
-                offsetX = (canvasWidth - drawWidth) / 2
-                offsetY = 0
+            if (fitMode === "cover") {
+                if (imgRatio > canvasRatio) {
+                    // Image is wider than canvas -> Constrain height
+                    drawHeight = canvasHeight
+                    drawWidth = canvasHeight * imgRatio
+                    offsetX = (canvasWidth - drawWidth) / 2
+                    offsetY = 0
+                } else {
+                    // Image is taller than canvas -> Constrain width
+                    drawWidth = canvasWidth
+                    drawHeight = canvasWidth / imgRatio
+                    offsetX = 0
+                    offsetY = (canvasHeight - drawHeight) / 2
+                }
             } else {
-                // Image is taller than canvas -> Constrain width
-                drawWidth = canvasWidth
-                drawHeight = canvasWidth / imgRatio
-                offsetX = 0
-                offsetY = (canvasHeight - drawHeight) / 2
+                // contain
+                if (imgRatio > canvasRatio) {
+                    // Image is wider than canvas -> Constrain width
+                    drawWidth = canvasWidth
+                    drawHeight = canvasWidth / imgRatio
+                    offsetX = 0
+                    offsetY = (canvasHeight - drawHeight) / 2
+                } else {
+                    // Image is taller than canvas -> Constrain height
+                    drawHeight = canvasHeight
+                    drawWidth = canvasHeight * imgRatio
+                    offsetX = (canvasWidth - drawWidth) / 2
+                    offsetY = 0
+                }
             }
 
             ctx.clearRect(0, 0, canvasWidth, canvasHeight)
@@ -113,7 +141,7 @@ export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
 
-    }, [scrollProgress, isLoaded, images])
+    }, [scrollProgress, isLoaded, images, fitMode])
 
 
     return (
