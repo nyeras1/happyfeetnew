@@ -19,16 +19,106 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function Footer() {
   const [email, setEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [subscribeState, setSubscribeState] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [inlineMessage, setInlineMessage] = useState<string | null>(null)
+  const [shake, setShake] = useState(false)
+  const resetTimerRef = useRef<number | null>(null)
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) window.clearTimeout(resetTimerRef.current)
+    }
+  }, [])
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // Handle newsletter subscription
-    console.log("[v0] Newsletter subscription:", email)
-    setEmail("")
+    const normalizedEmail = email.trim().toLowerCase()
+    const isValidEmail = (() => {
+      if (normalizedEmail.length > 254) return false
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(normalizedEmail)) return false
+      if (normalizedEmail.includes("..")) return false
+
+      const [local, domain] = normalizedEmail.split("@")
+      if (!local || !domain) return false
+      if (local.startsWith(".") || local.endsWith(".")) return false
+      if (domain.startsWith("-") || domain.endsWith("-")) return false
+      if (domain.startsWith(".") || domain.endsWith(".")) return false
+      if (!domain.includes(".")) return false
+
+      const domainLower = domain.toLowerCase()
+      const blockedDomains = new Set([
+        "gmail.co",
+        "gmai.com",
+        "gmial.com",
+        "gamil.com",
+        "gmail.con",
+        "gmail.comm",
+        "gmail.cpm",
+        "gmail.cim",
+      ])
+      if (blockedDomains.has(domainLower)) return false
+
+      return true
+    })()
+
+    if (!isValidEmail) {
+      setInlineMessage("Please enter a valid email address.")
+      setSubscribeState("error")
+      setShake(true)
+      window.setTimeout(() => setShake(false), 450)
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubscribeState("loading")
+    setInlineMessage(null)
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail }),
+      })
+
+      const data = (await res.json().catch(() => null)) as
+        | { ok?: boolean; code?: string; message?: string }
+        | null
+
+      if (!res.ok) {
+        setInlineMessage(data?.message || "Something went wrong, please try again")
+        setSubscribeState("error")
+        setShake(true)
+        window.setTimeout(() => setShake(false), 450)
+        return
+      }
+
+      if (data?.code === "DUPLICATE") {
+        setInlineMessage(data?.message || "You’re already subscribed")
+        setSubscribeState("success")
+      } else {
+        setEmail("")
+        setInlineMessage("Welcome to the Happy Feet Travel Community ✨ Exclusive journeys await you.")
+        setSubscribeState("success")
+      }
+
+      if (resetTimerRef.current) window.clearTimeout(resetTimerRef.current)
+      resetTimerRef.current = window.setTimeout(() => {
+        setSubscribeState("idle")
+        setInlineMessage(null)
+      }, 5200)
+    } catch {
+      setInlineMessage("Something went wrong, please try again")
+      setSubscribeState("error")
+      setShake(true)
+      window.setTimeout(() => setShake(false), 450)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -59,22 +149,49 @@ export function Footer() {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 px-6 rounded-2xl bg-background/50 border-2 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-accent transition-all"
+                  className={`h-14 px-6 rounded-2xl bg-background/50 border-2 border-white/20 text-foreground placeholder:text-muted-foreground focus:border-accent transition-all premium-subscribe-input ${shake ? "premium-shake" : ""}`}
                   required
+                  disabled={isSubmitting}
                 />
                 <Button
                   type="submit"
-                  className="h-14 px-8 rounded-2xl bg-accent hover:bg-accent/90 text-accent-foreground font-bold uppercase tracking-wider shadow-3d hover:shadow-3d-hover hover:scale-105 transition-all"
+                  className={`h-14 px-8 rounded-2xl bg-accent hover:bg-accent/90 text-accent-foreground font-bold uppercase tracking-wider shadow-3d hover:shadow-3d-hover hover:scale-105 transition-all premium-subscribe-btn ${subscribeState === "loading" ? "premium-subscribe-btn--loading" : ""} ${subscribeState === "success" ? "premium-subscribe-btn--success" : ""} ${shake ? "premium-shake" : ""}`}
+                  disabled={isSubmitting || subscribeState === "success"}
                 >
-                  Subscribe
+                  <span className="premium-subscribe-btn__content" aria-live="polite">
+                    <span className={`premium-subscribe-btn__label ${subscribeState !== "idle" ? "premium-subscribe-btn__label--hidden" : ""}`}>Subscribe</span>
+                    <span className={`premium-subscribe-btn__loading ${subscribeState === "loading" ? "premium-subscribe-btn__loading--visible" : ""}`}>
+                      <span className="premium-dots" aria-hidden="true">
+                        <span />
+                        <span />
+                        <span />
+                      </span>
+                    </span>
+                    <span className={`premium-subscribe-btn__success ${subscribeState === "success" ? "premium-subscribe-btn__success--visible" : ""}`}>
+                      <svg className="premium-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      Subscribed
+                    </span>
+                  </span>
                 </Button>
               </form>
+
+              <div className="h-10 mt-3 flex items-center justify-center">
+                {inlineMessage ? (
+                  <p
+                    className={`text-sm md:text-[15px] leading-relaxed text-muted-foreground max-w-xl premium-subscribe-message ${subscribeState === "success" ? "premium-subscribe-message--success" : ""} ${subscribeState === "error" ? "premium-subscribe-message--error" : ""}`}
+                  >
+                    {inlineMessage}
+                  </p>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Main Footer Content - Mega Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand Section - Takes 4 columns */}
           <div className="lg:col-span-4 space-y-6">
             <h3 className="text-4xl font-serif font-bold text-high-contrast">Happy Feet</h3>
@@ -185,37 +302,37 @@ export function Footer() {
           </div>
 
           {/* Contact Info - 2 columns */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 lg:ml-0 lg:-ml-2">
             <h4 className="text-lg font-bold mb-6 text-high-contrast uppercase tracking-wider">Contact Us</h4>
             <ul className="space-y-5">
               <li className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl glass-morphism border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:border-primary transition-colors">
                   <Phone className="h-5 w-5 text-primary" />
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-1 min-w-0">
                   <p className="text-sm text-muted-foreground">Call Us</p>
-                  <p className="text-base font-semibold text-foreground">+1 (555) 123-4567</p>
+                  <p className="text-base font-semibold text-foreground whitespace-nowrap">+91 97429 97421</p>
                 </div>
               </li>
               <li className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl glass-morphism border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:border-secondary transition-colors">
                   <Mail className="h-5 w-5 text-secondary" />
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-1 min-w-0">
                   <p className="text-sm text-muted-foreground">Email Us</p>
-                  <p className="text-base font-semibold text-foreground">info@happyfeet.com</p>
+                  <p className="text-base font-semibold text-foreground break-all break-words">info@happyfeetholidaysresorts.com</p>
                 </div>
               </li>
               <li className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl glass-morphism border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:border-accent transition-colors">
                   <MapPin className="h-5 w-5 text-accent" />
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-1 min-w-0">
                   <p className="text-sm text-muted-foreground">Visit Us</p>
-                  <p className="text-base font-semibold text-foreground leading-relaxed">
-                    123 Travel Street
+                  <p className="text-base font-semibold text-foreground leading-relaxed break-words">
+                    2nd floor, Om Shakthi, 57, complex, Hosur Rd
                     <br />
-                    Adventure City, AC 12345
+                    Bengaluru, Karnataka 560068
                   </p>
                 </div>
               </li>
@@ -227,7 +344,7 @@ export function Footer() {
         <div className="pt-10 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-sm text-muted-foreground flex items-center gap-2">
-              © 2025 Happy Feet Holidays & Resorts. Made with{" "}
+              © 2026 Happy Feet Holidays & Resorts. Made with{" "}
               <Heart className="h-4 w-4 text-red-500 fill-red-500 animate-pulse" /> for travelers worldwide.
             </p>
             <div className="flex flex-wrap gap-8 items-center">

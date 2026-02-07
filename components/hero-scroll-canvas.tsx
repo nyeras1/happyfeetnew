@@ -4,14 +4,16 @@ import { useEffect, useRef, useState } from "react"
 
 interface HeroScrollCanvasProps {
     scrollProgress: number
+    onFirstFrameReady?: () => void
 }
 
-export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
+export function HeroScrollCanvas({ scrollProgress, onFirstFrameReady }: HeroScrollCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const [images, setImages] = useState<HTMLImageElement[]>([])
     const [isLoaded, setIsLoaded] = useState(false)
     const [fitMode, setFitMode] = useState<"cover" | "contain">("cover")
     const totalFrames = 170
+    const didNotifyFirstFrame = useRef(false)
 
     useEffect(() => {
         const updateFit = () => {
@@ -23,37 +25,75 @@ export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
         return () => window.removeEventListener("resize", updateFit)
     }, [])
 
-    // Preload images
+    // Preload images (progressive): load first frame ASAP, then lazily load the rest
     useEffect(() => {
-        let loadedCount = 0
-        const imageArray: HTMLImageElement[] = []
+        let cancelled = false
         const imageUrls = Array.from({ length: totalFrames }, (_, i) => {
             const frameNum = (i + 1).toString().padStart(3, "0")
             return `/travel images/ezgif-frame-${frameNum}.jpg`
         })
 
-        const onImageLoad = () => {
-            loadedCount++
-            if (loadedCount === totalFrames) {
-                setIsLoaded(true)
-                setImages(imageArray)
+        const imageArray: Array<HTMLImageElement | undefined> = new Array(totalFrames)
+        let loadedCount = 0
+
+        const commitImages = () => {
+            if (cancelled) return
+            setImages(imageArray.filter(Boolean) as HTMLImageElement[])
+        }
+
+        const loadFrame = (index: number) => {
+            if (cancelled) return
+            const img = new Image()
+            img.decoding = "async"
+            img.src = imageUrls[index]
+            img.onload = () => {
+                if (cancelled) return
+                imageArray[index] = img
+                loadedCount++
+
+                if (index === 0) {
+                    setIsLoaded(true)
+                    commitImages()
+
+                    if (!didNotifyFirstFrame.current) {
+                        didNotifyFirstFrame.current = true
+                        onFirstFrameReady?.()
+                    }
+                } else if (loadedCount % 12 === 0) {
+                    commitImages()
+                }
+            }
+            img.onerror = () => {
+                if (cancelled) return
+                loadedCount++
+                if (index === 0) {
+                    setIsLoaded(true)
+
+                    if (!didNotifyFirstFrame.current) {
+                        didNotifyFirstFrame.current = true
+                        onFirstFrameReady?.()
+                    }
+                }
             }
         }
 
-        imageUrls.forEach((url) => {
-            const img = new Image()
-            img.src = url
-            img.onload = onImageLoad
-            img.onerror = () => {
-                // Fallback or skip
-                loadedCount++
-                if (loadedCount === totalFrames) {
-                    setIsLoaded(true)
-                    setImages(imageArray)
-                }
+        loadFrame(0)
+
+        const loadRest = () => {
+            for (let i = 1; i < totalFrames; i++) {
+                loadFrame(i)
             }
-            imageArray.push(img)
-        })
+        }
+
+        if (typeof (window as any).requestIdleCallback === "function") {
+            ;(window as any).requestIdleCallback(loadRest)
+        } else {
+            setTimeout(loadRest, 0)
+        }
+
+        return () => {
+            cancelled = true
+        }
     }, [])
 
     // Draw to canvas
@@ -71,7 +111,7 @@ export function HeroScrollCanvas({ scrollProgress }: HeroScrollCanvasProps) {
                 Math.max(0, Math.floor(scrollProgress * totalFrames))
             )
 
-            const img = images[frameIndex]
+            const img = images[frameIndex] || images[images.length - 1]
             if (!img) return
 
             // Handle high-DPI displays

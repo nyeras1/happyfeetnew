@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
+import Link from "next/link"
 
 export function CTASection() {
   return (
@@ -33,18 +34,22 @@ export function CTASection() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-10">
                 <Button
+                  asChild
                   size="lg"
                   className="h-20 px-14 bg-white text-black hover:bg-accent hover:text-white text-xl font-black uppercase tracking-[0.2em] rounded-full shadow-3d hover:shadow-3d-hover transition-all duration-500 hover:scale-105 hover:-translate-y-2 group/btn"
                 >
-                  Start Planning
-                  <ArrowRight className="ml-3 h-6 w-6 group-hover/btn:translate-x-2 transition-transform" />
+                  <Link href="/book">
+                    Start Planning
+                    <ArrowRight className="ml-3 h-6 w-6 group-hover/btn:translate-x-2 transition-transform" />
+                  </Link>
                 </Button>
                 <Button
+                  asChild
                   variant="outline"
                   size="lg"
                   className="h-20 px-14 border-2 border-white/30 text-white hover:bg-white hover:text-black text-xl font-black uppercase tracking-[0.2em] rounded-full backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 bg-transparent shadow-3d"
                 >
-                  Contact Expert
+                  <Link href="/contact">Contact Expert</Link>
                 </Button>
               </div>
             </div>

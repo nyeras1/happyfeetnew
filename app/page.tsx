@@ -1,7 +1,5 @@
 import { HeroSection } from "@/components/hero-section"
 import { TopDestinations } from "@/components/top-destinations"
-import { AboutPreview } from "@/components/about-preview"
-import { VisionMission } from "@/components/vision-mission"
 import { PopularPackages } from "@/components/popular-packages"
 import { PackageCategories } from "@/components/package-categories"
 import { TestimonialsSection } from "@/components/testimonials-section"
@@ -54,8 +52,6 @@ export default function HomePage() {
       </section>
 
       <TopDestinations />
-      <AboutPreview />
-      <VisionMission />
       <PopularPackages />
       <PackageCategories />
       <TestimonialsSection />

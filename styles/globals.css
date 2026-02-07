@@ -123,3 +123,182 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes premium-dots {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes premium-check-draw {
+  from {
+    stroke-dashoffset: 24;
+    opacity: 0.2;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes premium-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes premium-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(1px); }
+}
+
+.premium-subscribe-btn {
+  position: relative;
+  will-change: transform;
+}
+
+.premium-subscribe-btn__content {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 9.5rem;
+}
+
+.premium-subscribe-btn__label,
+.premium-subscribe-btn__loading,
+.premium-subscribe-btn__success {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 260ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.premium-subscribe-btn__label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.premium-subscribe-btn__label--hidden {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+.premium-subscribe-btn__loading {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.premium-subscribe-btn__loading--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.premium-subscribe-btn__success {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.premium-subscribe-btn__success--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.premium-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.premium-dots > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.6;
+  animation: premium-dots 900ms ease-in-out infinite;
+}
+
+.premium-dots > span:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.premium-dots > span:nth-child(3) {
+  animation-delay: 280ms;
+}
+
+.premium-check {
+  width: 18px;
+  height: 18px;
+}
+
+.premium-check path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+}
+
+.premium-subscribe-btn--loading {
+  transform: translateY(-1px);
+}
+
+.premium-subscribe-btn--success {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 30px rgba(255, 217, 61, 0.18),
+    0 8px 22px rgba(16, 185, 129, 0.10),
+    0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+.premium-subscribe-btn--success .premium-check path {
+  animation: premium-check-draw 560ms ease forwards;
+}
+
+.premium-subscribe-message {
+  animation: premium-message-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.premium-subscribe-message--success {
+  color: color-mix(in oklab, var(--foreground) 72%, oklch(0.828 0.189 84.429) 28%);
+}
+
+.premium-subscribe-message--error {
+  color: color-mix(in oklab, var(--foreground) 70%, var(--destructive) 30%);
+}
+
+.premium-shake {
+  animation: premium-shake 420ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-subscribe-btn,
+  .premium-subscribe-btn__label,
+  .premium-subscribe-btn__loading,
+  .premium-subscribe-btn__success,
+  .premium-subscribe-message,
+  .premium-dots > span,
+  .premium-check path,
+  .premium-shake {
+    animation: none !important;
+    transition: none !important;
+  }
+}

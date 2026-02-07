@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Chatbot } from "@/components/chatbot"
 import { AppShell } from "@/components/app-shell"
+import { Toaster } from "@/components/ui/toaster"
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
@@ -54,6 +55,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <Chatbot />
+          <Toaster />
           <Analytics />
         </AppShell>
       </body>
