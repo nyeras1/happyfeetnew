@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react"
+import { useEffect, useMemo, useRef, useState, type FormEvent, Suspense } from "react"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -16,7 +16,7 @@ type TribeRecommendation = {
   note: string
 }
 
-export default function DestinationsPage() {
+function DestinationsContent() {
   const packages = TRAVEL_PACKAGES
 
   const searchParams = useSearchParams()
@@ -124,7 +124,7 @@ export default function DestinationsPage() {
       `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nPreferred Month: ${month}\nPackage: ${pkg}\n\nMessage:\n${message}`,
     )
 
-    window.location.href = `mailto:concierge@happyfeet.com?subject=${subject}&body=${body}`
+    window.location.href = `mailto:happyfeetholidaysresorts.com?subject=${subject}&body=${body}`
   }
 
   return (
@@ -438,5 +438,13 @@ export default function DestinationsPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function DestinationsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DestinationsContent />
+    </Suspense>
   )
 }
