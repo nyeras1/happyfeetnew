@@ -29,7 +29,7 @@ export function TestimonialsSection() {
   ]
 
   return (
-    <section className="py-32 bg-gradient-to-b from-background to-card relative overflow-hidden">
+    <section id="testimonials" className="py-32 bg-gradient-to-b from-background to-card relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 right-20 w-96 h-96 bg-secondary rounded-full blur-3xl animate-float" />

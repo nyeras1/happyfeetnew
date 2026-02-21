@@ -220,13 +220,15 @@ export function Footer() {
             <div className="flex gap-4 pt-4">
               {[
                 { icon: Facebook, label: "Facebook", href: "#" },
-                { icon: Instagram, label: "Instagram", href: "#" },
+                { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/happy_feet_holidays?igsh=aWx1NDJ4bmhoMno%3D" },
                 { icon: Twitter, label: "Twitter", href: "#" },
                 { icon: Linkedin, label: "LinkedIn", href: "#" },
               ].map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noreferrer noopener" : undefined}
                   className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent transition-all duration-300 shadow-3d hover:shadow-3d-hover hover:scale-110 hover:-translate-y-1 group"
                   aria-label={social.label}
                 >
@@ -240,14 +242,21 @@ export function Footer() {
           <div className="lg:col-span-2">
             <h4 className="text-lg font-bold mb-6 text-high-contrast uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-4">
-              {["Home", "Packages", "Gallery", "About Us", "Testimonials", "Blog"].map((item) => (
-                <li key={item}>
+              {[
+                { label: "Home", href: "/" },
+                { label: "Packages", href: "/packages" },
+                { label: "Gallery", href: "/gallery" },
+                { label: "About Us", href: "/about" },
+                { label: "Testimonials", href: "/#testimonials" },
+                { label: "Blog", href: "/blog" },
+              ].map((item) => (
+                <li key={item.label}>
                   <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={item.href}
                     className="text-muted-foreground hover:text-accent transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground group-hover:bg-accent transition-colors" />
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -350,6 +359,9 @@ export function Footer() {
             <div className="flex flex-wrap gap-8 items-center">
               <Link href="/terms" className="text-sm text-muted-foreground hover:text-accent transition-colors">
                 Terms & Conditions
+              </Link>
+              <Link href="/refund" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                Refund & Cancellation Policy
               </Link>
               <Link href="/privacy" className="text-sm text-muted-foreground hover:text-accent transition-colors">
                 Privacy Policy
