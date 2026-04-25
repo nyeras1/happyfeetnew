@@ -31,7 +31,7 @@ export function Navbar() {
 
   return (
     // MASTER CONTAINER STRUCTURE
-    <header className="fixed top-0 left-0 right-0 z-[100] h-0 pointer-events-none">
+    <header className="absolute md:fixed top-0 left-0 right-0 z-[100] h-0 pointer-events-none">
 
       {/* =================================================================
           LOGO SECTION (EXTERNAL)
@@ -202,7 +202,7 @@ export function Navbar() {
       {/* Mobile Menu Dropdown & Keyframes */}
       <div
         className={cn(
-          "lg:hidden fixed left-4 right-4 z-40 transition-all duration-500 ease-in-out pointer-events-auto",
+          "lg:hidden absolute md:fixed left-4 right-4 z-40 transition-all duration-500 ease-in-out pointer-events-auto",
           isMobileMenuOpen
             ? "top-[230px] opacity-100 translate-y-0"
             : "top-[200px] opacity-0 -translate-y-4 pointer-events-none"

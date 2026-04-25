@@ -145,7 +145,7 @@ export const destinations: DestinationData = {
     },
     Gujarat: {
       hook: "White deserts, lion safaris, and sacred coastlines",
-      image: "/canvas%20images/herosection.png",
+      image: "/gujarath.png",
       places: [
         { name: "Rann of Kutch", type: "Desert", hook: "White rann and cultural evenings", priceFrom: "₹21,999", image: placeholderImage, ...plan("4N/5D", ["Day 1: Bhuj Arrival – Hotel Check-in – Aina Mahal & Prag Mahal", "Day 2: White Rann – Tent City – Cultural Program & Folk Dance", "Day 3: Kalo Dungar – Sunrise – Fossil Park – Mandvi Beach", "Day 4: Kutch Handicrafts Village Tour – Local Artisan Workshops", "Day 5: Departure – Bhuj Airport"]) },
         { name: "Gir National Park", type: "Wildlife", hook: "Asiatic lion safari trails", priceFrom: "₹24,999", image: placeholderImage, ...plan("4N/5D", ["Day 1: Rajkot/Ahmedabad Arrival – Drive to Sasan Gir", "Day 2: Morning & Evening Jeep Safari – Asiatic Lion Spotting", "Day 3: Crocodile Breeding Center – Devaliya Safari Park", "Day 4: Somnath Temple – Veraval Beach – Local Seafood", "Day 5: Departure – Return to Rajkot / Ahmedabad"], ["Curated safari stays", "Airport transfers", "Daily breakfast"]) },
@@ -154,7 +154,7 @@ export const destinations: DestinationData = {
     },
     "Andhra Pradesh & Telangana": {
       hook: "Temple circuits, heritage forts, and cultural cities",
-      image: "/canvas%20images/herosection.png",
+      image: "/ap%20%26%20tg.png",
       places: [
         { name: "Tirupati & Vijayawada", type: "Heritage", hook: "Pilgrimage route with cave and fort visits", priceFrom: "₹18,999", image: "/destinations/tirupati.png", ...plan("4N/5D", ["Day 1: Tirupati Arrival – Srikalahasti Temple – Padmavathi Temple", "Day 2: Tirumala – Venkateswara Temple Darshan – Akasha Ganga", "Day 3: Chandragiri Fort – Silathoranam – Natural Arch", "Day 4: Drive to Vijayawada – Kanakadurga Temple – Prakasam Barrage", "Day 5: Undavalli Caves – Kondapalli Fort – Departure"], ["Curated stays", "Train/Taxi transfers", "Daily breakfast"]) },
         { name: "Hyderabad", type: "City", hook: "Old city landmarks and modern attractions", priceFrom: "₹19,999", image: "/destinations/hyderabad.png", ...plan("4N/5D", ["Day 1: Hyderabad Arrival – Charminar – Laad Bazaar – Biryani Dinner", "Day 2: Golconda Fort – Sound & Light Show – Qutb Shahi Tombs", "Day 3: Salar Jung Museum – Hussain Sagar Lake – Lumbini Park", "Day 4: Ramoji Film City – Birla Mandir – Hi-Tech City", "Day 5: Shopping – Shilparamam – Departure"]) },
@@ -189,7 +189,7 @@ export const destinations: DestinationData = {
     },
     Maharashtra: {
       hook: "City icons, cave heritage, and hill retreats",
-      image: "/canvas%20images/herosection.png",
+      image: "/Maharashtra.png",
       places: [
         { name: "Mumbai & Lonavala", type: "City", hook: "City lights and hill station breaks", priceFrom: "₹22,499", image: "/destinations/lonavala.png", ...plan("4N/5D", ["Day 1: Mumbai Arrival – Gateway of India – Marine Drive Walk", "Day 2: Elephanta Caves – Colaba Causeway – Bollywood Tour", "Day 3: Sanjay Gandhi National Park – Kanheri Caves – Juhu Beach", "Day 4: Drive to Lonavala – Tiger's Leap – Bhushi Dam – Bhaja Caves", "Day 5: Karla Caves – Return to Mumbai – Departure"]) },
         { name: "Aurangabad (Ajanta & Ellora)", type: "Heritage", hook: "Cave art and Deccan history", priceFrom: "₹21,999", image: "/destinations/ajanta.png", ...plan("4N/5D", ["Day 1: Aurangabad Arrival – Bibi Ka Maqbara – Daulatabad Fort", "Day 2: Ellora Caves – Kailasa Temple – Ghrishneshwar Jyotirlinga", "Day 3: Ajanta Caves – Rock-cut Buddhist Paintings – Guided Tour", "Day 4: Panchakki – Aurangabad Caves – Local Silk Market", "Day 5: Departure – Aurangabad Airport"]) },
@@ -207,7 +207,7 @@ export const destinations: DestinationData = {
     },
     "Uttar Pradesh & Uttarakhand": {
       hook: "Sacred cities, river ghats, and Himalayan foothills",
-      image: "/canvas%20images/herosection.png",
+      image: "/Uttar%20Pradesh%20%26%20Uttarakhand.png",
       places: [
         { name: "Agra, Mathura & Vrindavan", type: "Heritage", hook: "Mughal marvels and devotional circuits", priceFrom: "₹19,999", image: "/destinations/agra.png", ...plan("4N/5D", ["Day 1: Delhi/Agra Arrival – Taj Mahal Sunset View – Hotel Check-in", "Day 2: Taj Mahal Sunrise – Agra Fort – Mehtab Bagh", "Day 3: Fatehpur Sikri – Buland Darwaza – Drive to Mathura", "Day 4: Krishna Janmabhoomi – Vrindavan – ISKCON Temple – Prem Mandir", "Day 5: Departure – Delhi Airport"], ["Curated stays", "Train/Car transfers", "Daily breakfast"]) },
         { name: "Varanasi", type: "Spiritual", hook: "Ghats, aarti, and timeless heritage", priceFrom: "₹18,999", image: placeholderImage, ...plan("4N/5D", ["Day 1: Varanasi Arrival – Dasaswamedh Ghat – Ganga Aarti", "Day 2: Sunrise Boat Ride – Manikarnika Ghat – Kashi Vishwanath", "Day 3: Sarnath – Dhamek Stupa – Mulagandha Kuti Vihar", "Day 4: Ramnagar Fort – Bharat Mata Temple – Silk Weaving", "Day 5: Evening Aarti – Departure – Lal Bahadur Shastri Airport"]) },
@@ -253,7 +253,7 @@ export const destinations: DestinationData = {
     },
     Azerbaijan: {
       hook: "Caspian charm, fire temples, and mountain villages",
-      image: "/canvas%20images/herosection.png",
+      image: "/Azerbaijan%20%2B%20Georgia.jpg",
       places: [
         { name: "4N/5D - Baku Highlights", type: "Package", hook: "Classic Baku and nearby wonders", priceFrom: "₹46,999", image: "/destinations/baku.png", ...plan("4N/5D", ["Day 1: Baku Arrival – Flame Towers Night View – Bulvar Promenade", "Day 2: Old City – Maiden Tower – Palace of Shirvanshahs", "Day 3: Gobustan National Park – Mud Volcanoes – Petroglyphs", "Day 4: Heydar Aliyev Centre – Carpet Museum – Highland Park", "Day 5: Nizami Street Shopping – Departure"]) },
         { name: "5N/6D - Azerbaijan Explored", type: "Package", hook: "Baku plus Sheki and Lahij", priceFrom: "₹54,999", image: "/destinations/aze explord.png", ...plan("5N/6D", ["Day 1: Baku Arrival – Flame Towers – Boulevard", "Day 2: Old City – Miniature Books Museum – Ateshgah Fire Temple", "Day 3: Gobustan – Mud Volcanoes – Yanardagh Eternal Flame", "Day 4: Sheki – Khan Palace – Caravanserai", "Day 5: Lahij Village – Handicraft Bazaar – Return to Baku", "Day 6: Shopping – Departure"]) },
@@ -262,7 +262,7 @@ export const destinations: DestinationData = {
     },
     "Sri Lanka": {
       hook: "Culture, tea country, and coastal escapes",
-      image: "/canvas%20images/herosection.png",
+      image: "/Sri%20Lanka.jpg",
       places: [
         { name: "4N/5D - Cultural Triangle", type: "Package", hook: "Temples and heritage highlights", priceFrom: "₹48,999", image: "/destinations/cultural triangle.png", ...plan("4N/5D", ["Day 1: Colombo Arrival – Gangaramaya Temple – Galle Face Green", "Day 2: Sigiriya Rock Fortress – Dambulla Cave Temple", "Day 3: Kandy – Temple of the Tooth – Cultural Dance Show", "Day 4: Tea Country – Nuwara Eliya – Gregory Lake", "Day 5: Departure – Colombo Airport"]) },
         { name: "5N/6D - Island Discovery", type: "Package", hook: "Classic north-central and hill country route", priceFrom: "₹56,999", image: "/destinations/island discovery.png", ...plan("5N/6D", ["Day 1: Colombo Arrival – City Tour – Pettah Market", "Day 2: Sigiriya – Lion Rock Climb – Village Safari", "Day 3: Polonnaruwa Ruins – Minneriya Elephant Gathering", "Day 4: Kandy – Peradeniya Botanical Gardens – Temple", "Day 5: Nuwara Eliya – Tea Plantation – Horton Plains", "Day 6: Departure"]) },
@@ -298,7 +298,7 @@ export const destinations: DestinationData = {
     },
     China: {
       hook: "Ancient wonders, fast trains, and mega cities",
-      image: "/canvas%20images/herosection.png",
+      image: "/china.png",
       places: [
         { name: "4N/5D - Beijing Highlights", type: "Package", hook: "Great Wall and historic Beijing", priceFrom: "₹59,999", image: "/destinations/beijing.png", ...plan("4N/5D", ["Day 1: Beijing Arrival – Tiananmen Square – Forbidden City", "Day 2: Great Wall of China (Mutianyu) – Summer Palace", "Day 3: Temple of Heaven – 798 Art District – Wangfujing Night Market", "Day 4: Lama Temple – Confucius Temple – Hutong Rickshaw Tour", "Day 5: Shopping – Silk Market – Departure"]) },
         { name: "5N/6D - Beijing & Shanghai", type: "Package", hook: "Twin-city China highlights", priceFrom: "₹68,999", image: "/destinations/beijing highlights.png", ...plan("5N/6D", ["Day 1: Beijing Arrival – Tiananmen – Forbidden City", "Day 2: Great Wall – Ming Tombs – Peking Duck Dinner", "Day 3: High Speed Train to Shanghai – Bund Walk", "Day 4: The Bund – Yu Garden – Nanjing Road – Pudong", "Day 5: Shanghai Tower – French Concession – Xintiandi", "Day 6: Departure"], ["Curated hotels", "High speed train", "Daily breakfast"]) },
