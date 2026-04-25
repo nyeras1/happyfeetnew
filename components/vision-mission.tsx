@@ -9,7 +9,7 @@ export function VisionMission() {
 
   const missionPoints = [
     { title: "Weave Dreams into Journeys", icon: Sparkles },
-    { title: "Deliver Seamless Escapes", icon: Globe },
+    { title: "Deliver Thoughtful Escapes", icon: Globe },
     { title: "Open Doors to the World", icon: Star },
     { title: "Wrap You in Comfort", icon: ShieldCheck },
     { title: "Travel with Heart", icon: Users },
@@ -20,7 +20,7 @@ export function VisionMission() {
     { title: "Customer Delight", desc: "Creating moments of pure joy.", icon: Star },
     { title: "Integrity & Trust", desc: "Honesty in every journey.", icon: ShieldCheck },
     { title: "Sustainability", desc: "Protecting our planet's beauty.", icon: Globe },
-    { title: "Innovation", desc: "Crafting modern travel solutions.", icon: Target },
+    { title: "Innovation", desc: "Crafting modern and human travel solutions.", icon: Target },
     { title: "Collaboration", desc: "Working together for excellence.", icon: Users },
   ]
 
@@ -36,7 +36,7 @@ export function VisionMission() {
                 <span className="text-sm font-bold tracking-[0.2em] text-secondary uppercase">Our Mission</span>
               </div>
               <h3 className="text-5xl md:text-6xl font-serif font-bold text-high-contrast leading-[1.1]">
-                Turning wanderlust into reality with soul-stirring journeys
+                Turning wanderlust into warm, story-filled journeys
               </h3>
             </div>
 

@@ -35,8 +35,8 @@ const sections = [
             </ul>
           </li>
           <li>Cancellation is effective only after confirmation from Happy Feet.</li>
-          <li>Cancellation charges may apply as per supplier policy.</li>
-          <li>Service/convenience fees charged by Happy Feet may be non-refundable.</li>
+          <li>Cancellation terms may apply as per supplier policy.</li>
+          <li>Service-related deductions by Happy Feet may be non-refundable.</li>
         </ul>
       </>
     ),
@@ -50,12 +50,12 @@ const sections = [
         <ul className="mt-3 list-disc pl-6 space-y-2">
           <li>Cancellation and refund rules depend on airline fare rules.</li>
           <li>Some fares (e.g., promotional or discounted fares) may be non-refundable.</li>
-          <li>Airline cancellation charges will apply.</li>
+          <li>Airline cancellation terms will apply.</li>
         </ul>
 
         <h3 className="mt-6 text-lg sm:text-xl font-black tracking-tight text-white">B. Happy Feet Service Charges</h3>
         <ul className="mt-3 list-disc pl-6 space-y-2">
-          <li>A processing fee may be deducted.</li>
+          <li>A processing deduction may be applied.</li>
           <li>Payment gateway charges (if applicable) may not be refundable.</li>
         </ul>
 
@@ -122,7 +122,7 @@ const sections = [
           <li>Visa processing status (if applicable)</li>
         </ul>
 
-        <p className="mt-4 font-black text-white">Indicative Cancellation Charges:</p>
+        <p className="mt-4 font-black text-white">Indicative Cancellation Deductions:</p>
         <ul className="mt-3 list-disc pl-6 space-y-2">
           <li>30+ days before travel → 10–25% deduction</li>
           <li>15–30 days → 25–50% deduction</li>
@@ -131,7 +131,7 @@ const sections = [
         </ul>
 
         <p className="mt-4">
-          Actual terms may vary and will be mentioned in the booking confirmation. Visa fees, insurance premiums, and
+          Actual terms may vary and will be mentioned in the booking confirmation. Visa-related amounts, insurance premiums, and
           non-refundable components are not refundable.
         </p>
       </>
@@ -186,7 +186,7 @@ const sections = [
         <p>Refunds will be processed:</p>
         <ul className="mt-4 list-disc pl-6 space-y-2">
           <li>To the original payment method</li>
-          <li>After deducting applicable cancellation and service charges</li>
+          <li>After applying applicable cancellation and service deductions</li>
         </ul>
         <p className="mt-4">Refunds cannot be processed to third-party accounts.</p>
       </>
@@ -199,7 +199,7 @@ const sections = [
       <>
         <p>If only part of the booking is cancelled:</p>
         <ul className="mt-4 list-disc pl-6 space-y-2">
-          <li>Cancellation charges may apply per passenger or per room</li>
+          <li>Cancellation deductions may apply per passenger or per room</li>
           <li>Group booking refunds may vary depending on supplier terms</li>
         </ul>
       </>
@@ -214,7 +214,7 @@ const sections = [
         <ul className="mt-4 list-disc pl-6 space-y-2">
           <li>Subject to availability</li>
           <li>May involve fare differences</li>
-          <li>May attract amendment fees from suppliers and service charges from Happy Feet</li>
+          <li>May attract amendment terms from suppliers and service deductions from Happy Feet</li>
         </ul>
       </>
     ),

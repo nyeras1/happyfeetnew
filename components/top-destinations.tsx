@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 import { TRAVEL_PACKAGES } from "@/lib/travel-packages"
 
@@ -23,12 +23,11 @@ export function TopDestinations() {
       <div className="container px-4 mx-auto relative z-10">
         <div className="text-center space-y-6 mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-morphism border border-white/10">
-            <Sparkles className="h-4 w-4 text-accent" />
-            <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">TOP DESTINATIONS</span>
+            <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">TOP PICKS</span>
           </div>
-          <h3 className="text-5xl md:text-7xl font-serif font-bold tracking-tighter text-high-contrast">Top Destinations</h3>
+          <h3 className="text-5xl md:text-7xl font-bold tracking-tighter text-high-contrast">Top Destinations</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Tap a destination to view the itinerary and send a quick inquiry.
+            Tap a destination to explore the itinerary and send a quick enquiry.
           </p>
         </div>
 
@@ -63,12 +62,12 @@ export function TopDestinations() {
                     </div>
                     <div className="absolute top-5 right-5 z-10">
                       <div className="px-4 py-2 rounded-full bg-accent/20 backdrop-blur-md border border-accent/30 text-accent text-xs font-bold tracking-[0.2em] uppercase">
-                        Limited slots
+                        Handpicked
                       </div>
                     </div>
 
                     <div className="absolute inset-x-0 bottom-0 p-7">
-                      <h4 className="text-white text-3xl font-serif font-bold leading-tight mb-2 text-shadow-strong">
+                      <h4 className="text-white text-3xl font-bold leading-tight mb-2 text-shadow-strong">
                         {pkg.title}
                       </h4>
                       <p className="text-white/90 text-sm leading-relaxed mb-5 line-clamp-2">{pkg.tagline}</p>
@@ -85,7 +84,7 @@ export function TopDestinations() {
                       </div>
 
                       <div className="w-full h-12 rounded-2xl bg-white text-black font-bold uppercase tracking-wider transition-all shadow-lg flex items-center justify-center group/btn">
-                        View Full Itinerary
+                        more details
                         <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                       </div>
                     </div>

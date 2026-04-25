@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, Sparkles } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -60,7 +60,7 @@ export function Navbar() {
           )}>
             <Image
               src="/logo-CZBEvsvV.png"
-              alt="Happy Feet Holidays & Resorts - Premium Travel Experiences"
+              alt="Happy Feet Holidays & Resorts - Travel stories made personal"
               fill
               className={cn(
                 "object-contain",
@@ -92,23 +92,23 @@ export function Navbar() {
             "mx-auto",
 
             // Height Transition
-            scrolled ? "h-[72px]" : "h-[88px]",
+            scrolled ? "h-[60px]" : "h-[70px]",
             "lg:mt-6",
             "mt-[140px]", // Mobile top spacing
 
             // Shape & Visuals
             "rounded-[3rem]",
-            "border-[2px] border-white/25",
-            "shadow-[0_10px_40px_rgba(0,0,0,0.35),0_1px_3px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.2),inset_0_-1px_0_rgba(0,0,0,0.1)]",
+            "border border-white/20",
+            "shadow-[0_8px_28px_rgba(0,0,0,0.28),0_1px_2px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.18)]",
 
             // Flex Layout (Static Flow now, no absolute links)
-            "flex items-center justify-between lg:justify-center gap-6 lg:gap-12 px-6", // tighter horizontal footprint
+            "flex items-center justify-between lg:justify-center gap-5 lg:gap-10 px-5", // tighter horizontal footprint
 
             "transition-all duration-400 ease-out",
-            "backdrop-blur-[30px] backdrop-saturate-[180%]"
+            "backdrop-blur-[20px] backdrop-saturate-[150%]"
           )}
           style={{
-            background: "linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.12) 100%)"
+            background: "linear-gradient(135deg, rgba(15, 15, 15, 0.62) 0%, rgba(35, 35, 35, 0.5) 52%, rgba(15, 15, 15, 0.62) 100%)"
           }}
         >
           {/* Shimmer Effect */}
@@ -155,8 +155,8 @@ export function Navbar() {
               asChild
               className={cn(
                 "relative overflow-hidden group",
-                "h-12 px-9 rounded-full",
-                "font-['Poppins'] font-bold text-[12px] uppercase tracking-[0.14em]",
+                "h-10 px-6 rounded-full",
+                "font-['Poppins'] font-extrabold text-[11px] uppercase tracking-[0.1em]",
                 "text-[#1A1A1A]",
                 "border-2 border-white/40",
                 "shadow-[0_6px_25px_rgba(255,107,53,0.45),0_2px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.3)]",
@@ -168,9 +168,8 @@ export function Navbar() {
                 background: "linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFD93D 100%)"
               }}
             >
-              <Link href="/book" className="relative z-10 flex items-center gap-2">
-                <Sparkles className="w-[16px] h-[16px] group-hover:text-white transition-colors duration-300 group-hover:animate-pulse" />
-                BOOK NOW
+              <Link href="/book" className="relative z-10 flex items-center">
+                START JOURNEY
                 <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_0.8s_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
               </Link>
             </Button>
@@ -194,7 +193,7 @@ export function Navbar() {
               size="sm"
               className="rounded-full bg-[#FF6B35] text-white font-bold uppercase text-[10px] tracking-wide shadow-lg"
             >
-              <Link href="/book">Book</Link>
+              <Link href="/book">Journey</Link>
             </Button>
           </div>
         </nav>
@@ -226,7 +225,7 @@ export function Navbar() {
               className="w-full mt-2 rounded-full h-12 bg-gradient-to-r from-[#FF6B35] to-[#FFD93D] text-black font-bold"
             >
               <Link href="/book" onClick={() => setIsMobileMenuOpen(false)}>
-                BOOK NOW
+                START JOURNEY
               </Link>
             </Button>
           </div>

@@ -21,15 +21,14 @@ export function CTASection() {
                 <span className="text-xs font-black tracking-[0.3em] text-white uppercase">Your Journey Awaits</span>
               </div>
 
-              <h2 className="text-6xl md:text-8xl font-serif font-bold text-high-contrast leading-[0.9] tracking-tighter">
+              <h2 className="text-6xl md:text-8xl font-bold text-high-contrast leading-[0.9] tracking-tighter">
                 Ready to <span className="text-accent italic">Explore</span>
                 <br />
                 the World?
               </h2>
 
               <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed text-shadow-strong">
-                Join our exclusive community of travelers and craft your next extraordinary memory with our luxury
-                concierge service.
+                Come, let us craft your next beautiful trip with warm support from our travel team.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-10">
@@ -39,7 +38,7 @@ export function CTASection() {
                   className="h-20 px-14 bg-white text-black hover:bg-accent hover:text-white text-xl font-black uppercase tracking-[0.2em] rounded-full shadow-3d hover:shadow-3d-hover transition-all duration-500 hover:scale-105 hover:-translate-y-2 group/btn"
                 >
                   <Link href="/book">
-                    Start Planning
+                    Start Journey
                     <ArrowRight className="ml-3 h-6 w-6 group-hover/btn:translate-x-2 transition-transform" />
                   </Link>
                 </Button>
@@ -49,7 +48,7 @@ export function CTASection() {
                   size="lg"
                   className="h-20 px-14 border-2 border-white/30 text-white hover:bg-white hover:text-black text-xl font-black uppercase tracking-[0.2em] rounded-full backdrop-blur-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 bg-transparent shadow-3d"
                 >
-                  <Link href="/contact">Contact Expert</Link>
+                  <Link href="/contact">Talk to Travel Expert</Link>
                 </Button>
               </div>
             </div>

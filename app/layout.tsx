@@ -17,7 +17,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700
 export const metadata: Metadata = {
   title: "Happy Feet Holidays & Resorts | Travel Differently",
   description:
-    "Where dreams meet destinations — curated holiday packages and exclusive resort stays across breathtaking destinations.",
+    "Travel stories made personal with curated stays, thoughtful itineraries, and a team that feels like family.",
   generator: "v0.app",
   icons: {
     icon: [

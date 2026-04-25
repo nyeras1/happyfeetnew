@@ -5,15 +5,15 @@ import { HelpCircle, Sparkles } from "lucide-react"
 const faqs: { q: string; a: string }[] = [
   {
     q: "How do I book a holiday package with Happy Feet?",
-    a: "You can book by submitting an inquiry on the Book page or by contacting our travel experts. Once we confirm your itinerary, you’ll receive payment details and a confirmation via email/SMS.",
+    a: "You can book by submitting an inquiry on the Book page or by contacting our travel experts. Once we confirm your itinerary, you will receive confirmation details by email/SMS.",
   },
   {
     q: "Do you offer customized itineraries?",
-    a: "Yes. We specialize in tailor-made travel. Share your preferred destinations, dates, and style, and our concierge team will craft options that match your budget and comfort.",
+    a: "Yes. We specialize in tailor-made travel. Share your preferred destinations, dates, and style, and our concierge team will craft options that match your comfort and expectations.",
   },
   {
-    q: "Are prices fixed after I see them?",
-    a: "Travel prices can be dynamic and may change until payment is completed. We always confirm final pricing before you pay.",
+    q: "When are my trip details finalized?",
+    a: "Travel availability can change quickly. We always share the final trip details before you complete confirmation.",
   },
   {
     q: "What is your cancellation and refund process?",
@@ -51,7 +51,7 @@ export default function FaqPage() {
               Frequently Asked Questions
             </h1>
             <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed">
-              Quick answers — crafted for a smooth, premium booking experience.
+              Quick answers for a smooth, stress-free booking experience.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -60,13 +60,13 @@ export default function FaqPage() {
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FF6B35] via-[#FFD93D] to-[#FF6B35] px-5 py-3 text-sm font-black tracking-[0.18em] uppercase text-black shadow-[0_14px_60px_rgba(255,217,61,0.14)]"
               >
                 <Sparkles className="h-4 w-4" />
-                Book Now
+                Start Journey
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-black tracking-[0.18em] uppercase text-white/90 hover:bg-white hover:text-black transition-colors"
               >
-                Contact Us
+                Contact Team
               </Link>
               <Link
                 href="/refund"

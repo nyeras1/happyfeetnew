@@ -17,7 +17,7 @@ const sections = [
             href="/book"
             className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#FF6B35] via-[#FFD93D] to-[#FF6B35] px-5 py-3 text-sm font-black tracking-[0.18em] uppercase text-black shadow-[0_14px_60px_rgba(255,217,61,0.14)]"
           >
-            Start Booking
+            Start Journey
           </Link>
           <Link
             href="/destinations"
@@ -41,15 +41,15 @@ const sections = [
         </p>
         <ul className="mt-4 list-disc pl-6 space-y-2">
           <li>
-            <span className="font-black text-white">Peak season:</span> best weather, higher prices, early booking
+            <span className="font-black text-white">Peak season:</span> best weather, high demand, early booking
             recommended.
           </li>
           <li>
-            <span className="font-black text-white">Shoulder season:</span> great value, fewer crowds, still excellent
+            <span className="font-black text-white">Shoulder season:</span> fewer crowds, balanced weather, excellent
             experience.
           </li>
           <li>
-            <span className="font-black text-white">Off season:</span> lowest prices, weather can be unpredictable.
+            <span className="font-black text-white">Off season:</span> quieter windows, weather can be unpredictable.
           </li>
         </ul>
       </>
@@ -106,15 +106,14 @@ const sections = [
       <>
         <ol className="list-decimal pl-6 space-y-3">
           <li>
-            <span className="font-black text-white">Share your preferences</span> — destination, dates, budget, and
+            <span className="font-black text-white">Share your preferences</span> — destination, dates, travel style, and
             travel style.
           </li>
           <li>
             <span className="font-black text-white">We curate options</span> — itinerary + stays + experiences.
           </li>
           <li>
-            <span className="font-black text-white">Confirm & pay</span> — final pricing may vary until payment is
-            completed.
+            <span className="font-black text-white">Confirm your journey</span> — final details are shared before confirmation.
           </li>
           <li>
             <span className="font-black text-white">Receive confirmations</span> — tickets/vouchers via email/SMS.
@@ -163,7 +162,7 @@ export default function TravelGuidePage() {
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FF6B35] via-[#FFD93D] to-[#FF6B35] px-5 py-3 text-sm font-black tracking-[0.18em] uppercase text-black shadow-[0_14px_60px_rgba(255,217,61,0.14)]"
               >
                 <Sparkles className="h-4 w-4" />
-                Book Now
+                Start Journey
               </Link>
               <Link
                 href="/destinations"
@@ -228,7 +227,7 @@ export default function TravelGuidePage() {
                   <div className="mt-12 rounded-3xl border border-white/10 bg-black/25 p-6">
                     <p className="text-xs font-black tracking-[0.22em] uppercase text-white/70">Need a hand?</p>
                     <p className="mt-2 text-sm sm:text-base text-white/75 leading-relaxed">
-                      Our experts can plan and optimize your trip for comfort, pricing, and premium stays.
+                      Our experts can shape your trip for comfort, experiences, and premium stays.
                     </p>
                     <div className="mt-5 flex flex-col sm:flex-row gap-3">
                       <Link
@@ -241,7 +240,7 @@ export default function TravelGuidePage() {
                         href="/contact"
                         className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#FF6B35] via-[#FFD93D] to-[#FF6B35] px-5 py-3 text-sm font-black tracking-[0.18em] uppercase text-black shadow-[0_14px_60px_rgba(255,217,61,0.14)]"
                       >
-                        Talk to Expert
+                        Talk to Travel Expert
                       </Link>
                     </div>
                   </div>

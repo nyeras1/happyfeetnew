@@ -3,7 +3,7 @@ import { ArrowRight, Newspaper, Sparkles } from "lucide-react"
 
 const posts = [
   {
-    title: "How to plan a premium holiday (without the stress)",
+    title: "How to shape a premium holiday (without stress)",
     excerpt:
       "A concierge-style checklist to book smarter, travel smoother, and enjoy more — from documents to stays to experiences.",
     href: "/contact",
@@ -12,7 +12,7 @@ const posts = [
   {
     title: "Best time to visit: top destinations by season",
     excerpt:
-      "From beach escapes to mountain retreats — pick the perfect travel window for weather, crowds, and value.",
+      "From beach escapes to mountain retreats — pick the best travel window for weather and crowd comfort.",
     href: "/destinations",
     tag: "Seasons",
   },
@@ -95,9 +95,9 @@ export default function BlogPage() {
                     ))}
                   </div>
                   <div className="mt-6 rounded-2xl border border-white/10 bg-black/25 px-4 py-4">
-                    <p className="text-xs font-black tracking-[0.22em] uppercase text-[#FFD93D]">Note</p>
+                    <p className="text-xs font-black tracking-[0.22em] uppercase text-[#FFD93D]">From our team</p>
                     <p className="mt-2 text-sm text-white/75 leading-relaxed">
-                      This is a lightweight blog page for now. If you want, I can add a full CMS later.
+                      Fresh travel notes will keep getting added here to help you plan better and travel easier.
                     </p>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function BlogPage() {
                   <div className="mt-10 rounded-3xl border border-white/10 bg-black/25 p-6">
                     <p className="text-xs font-black tracking-[0.22em] uppercase text-white/70">Want updates?</p>
                     <p className="mt-2 text-sm sm:text-base text-white/75 leading-relaxed">
-                      Tell me if you want a full blog system (admin panel, posts, categories, SEO pages).
+                      Want deeper destination stories? Reach us and we will share curated recommendations.
                     </p>
                     <div className="mt-5 flex flex-col sm:flex-row gap-3">
                       <Link

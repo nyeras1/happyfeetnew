@@ -9,34 +9,33 @@ import { MapPin, Phone, Mail, Clock, Send } from "lucide-react"
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen pt-40 pb-32 relative overflow-hidden bg-gradient-to-br from-background via-card to-background">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-card to-background pb-24 pt-28 font-['Poppins'] sm:pb-28 sm:pt-32 md:pb-32 md:pt-40">
       {/* Decorative 3D elements */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-40 left-10 w-96 h-96 bg-primary rounded-full blur-3xl animate-float-slow" />
         <div className="absolute bottom-40 right-10 w-96 h-96 bg-accent rounded-full blur-3xl animate-float" />
       </div>
 
-      <div className="container px-4 mx-auto relative z-10">
-        <div className="text-center space-y-6 mb-20 max-w-3xl mx-auto">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mx-auto mb-12 max-w-3xl space-y-5 text-center sm:mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-morphism border border-white/10">
             <Send className="h-4 w-4 text-accent" />
             <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">Get In Touch</span>
           </div>
-          <h1 className="text-6xl md:text-8xl font-serif font-bold tracking-tighter text-high-contrast">
-            Plan Your Journey
+          <h1 className="text-4xl font-bold tracking-tight text-high-contrast sm:text-5xl md:text-7xl lg:text-8xl">
+            Let us craft your journey
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Our luxury travel experts are dedicated to crafting your perfect escape. Connect with us to start your
-            adventure.
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
+            Our travel experts are here to craft a journey that fits your vibe. Share what you are dreaming of.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12">
           {/* Contact Info - 4 columns */}
-          <div className="lg:col-span-4 space-y-8">
-            <div className="glass-morphism-strong p-10 rounded-[3rem] shadow-3d border-2 border-white/10 space-y-8 h-full flex flex-col justify-center">
-              <h3 className="text-3xl font-serif font-bold text-high-contrast mb-4">Concierge Desk</h3>
-              <div className="space-y-8">
+          <div className="space-y-6 lg:col-span-4 lg:space-y-8">
+            <div className="glass-morphism-strong flex h-full flex-col justify-center space-y-7 rounded-[2rem] border border-white/15 p-6 shadow-3d sm:rounded-[2.5rem] sm:p-8 md:p-10 lg:sticky lg:top-28">
+              <h3 className="mb-4 text-3xl font-bold text-high-contrast">Concierge Desk</h3>
+              <div className="space-y-6 sm:space-y-8">
                 {[
                   {
                     icon: MapPin,
@@ -48,23 +47,23 @@ export default function ContactPage() {
                   { icon: Mail, title: "Email Inquiry", text: "customercare@happyfeetholidaysresorts.com", color: "text-accent" },
                   { icon: Clock, title: "Availability", text: "Mon - Sat: 9:00 - 19:00", color: "text-white" },
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-3d">
+                  <div key={i} className="group flex gap-4 sm:gap-5 md:gap-6">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-white/10 glass-morphism shadow-3d transition-transform group-hover:scale-110 sm:h-14 sm:w-14">
                       <item.icon className={`h-6 w-6 ${item.color}`} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h4 className="font-bold text-xs text-muted-foreground uppercase tracking-[0.2em] mb-1">
                         {item.title}
                       </h4>
-                      <p className="text-lg font-semibold text-high-contrast break-all break-words">{item.text}</p>
+                      <p className="text-sm font-semibold leading-relaxed text-high-contrast break-all sm:text-base md:text-lg">{item.text}</p>
                     </div>
                   </div>
                 ))}
                 
                 {/* Talk to Expert CTA */}
                 <div className="pt-4 border-t border-white/10">
-                  <Button 
-                    className="w-full h-14 bg-gradient-to-r from-[#FF6B35] to-[#FFD93D] hover:from-[#FF6B35]/90 hover:to-[#FFD93D]/90 text-black font-bold uppercase tracking-[0.14em] rounded-full shadow-3d hover:shadow-3d-hover hover:scale-[1.02] transition-all"
+                  <Button
+                    className="h-12 w-full rounded-full bg-gradient-to-r from-[#FF6B35] to-[#FFD93D] text-sm font-bold uppercase tracking-[0.12em] text-black shadow-3d transition-all hover:scale-[1.02] hover:from-[#FF6B35]/90 hover:to-[#FFD93D]/90 hover:shadow-3d-hover sm:h-14"
                     onClick={() => window.open('tel:+919742997421')}
                   >
                     <div className="flex items-center justify-center gap-2">
@@ -79,56 +78,59 @@ export default function ContactPage() {
 
           {/* Contact Form - 8 columns */}
           <div className="lg:col-span-8">
-            <div className="glass-morphism-strong p-10 md:p-16 rounded-[4rem] shadow-3d border-2 border-white/10">
-              <h3 className="text-4xl font-serif font-bold text-high-contrast mb-10">Begin Your Experience</h3>
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="glass-morphism-strong rounded-[2rem] border border-white/15 p-6 shadow-3d sm:rounded-[2.5rem] sm:p-8 md:p-12 lg:rounded-[3rem] lg:p-14">
+              <h3 className="mb-10 text-4xl font-bold text-high-contrast">Share Your Travel Idea</h3>
+              <form className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 md:gap-7">
                 <div className="space-y-3">
-                  <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-2">
+                  <label className="ml-1 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground sm:ml-2 sm:text-sm">
                     Full Name
                   </label>
                   <Input
                     placeholder="Enter your name"
-                    className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                    className="h-12 rounded-2xl border-white/20 bg-background/50 text-base focus:border-accent sm:h-14 sm:text-lg"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-2">
+                  <label className="ml-1 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground sm:ml-2 sm:text-sm">
                     Email Address
                   </label>
                   <Input
+                    type="email"
                     placeholder="your@email.com"
-                    className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                    className="h-12 rounded-2xl border-white/20 bg-background/50 text-base focus:border-accent sm:h-14 sm:text-lg"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-2">
+                  <label className="ml-1 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground sm:ml-2 sm:text-sm">
                     Phone Number
                   </label>
                   <Input
-                    placeholder="+1 (555) 000-0000"
-                    className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                    type="tel"
+                    inputMode="tel"
+                    placeholder="+91 98765 43210"
+                    className="h-12 rounded-2xl border-white/20 bg-background/50 text-base focus:border-accent sm:h-14 sm:text-lg"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-2">
+                  <label className="ml-1 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground sm:ml-2 sm:text-sm">
                     Subject
                   </label>
                   <Input
                     placeholder="How can we help?"
-                    className="rounded-2xl h-16 bg-background/50 border-white/20 focus:border-accent text-lg"
+                    className="h-12 rounded-2xl border-white/20 bg-background/50 text-base focus:border-accent sm:h-14 sm:text-lg"
                   />
                 </div>
                 <div className="md:col-span-2 space-y-3">
-                  <label className="text-sm font-black uppercase tracking-widest text-muted-foreground ml-2">
+                  <label className="ml-1 text-xs font-black uppercase tracking-[0.14em] text-muted-foreground sm:ml-2 sm:text-sm">
                     Your Vision
                   </label>
                   <Textarea
                     placeholder="Tell us about your dream destination and preferences..."
-                    className="rounded-3xl min-h-[180px] bg-background/50 border-white/20 focus:border-accent text-lg p-6"
+                    className="min-h-[140px] rounded-3xl border-white/20 bg-background/50 p-4 text-base focus:border-accent sm:min-h-[180px] sm:p-6 sm:text-lg"
                   />
                 </div>
                 <div className="md:col-span-2 pt-4 sm:pt-6">
-                  <Button className="w-full h-14 sm:h-16 bg-accent hover:bg-accent/90 text-accent-foreground rounded-full text-lg sm:text-xl font-black uppercase tracking-[0.2em] shadow-3d hover:shadow-3d-hover hover:scale-[1.02] transition-all py-3 sm:py-4">
+                  <Button className="h-12 w-full rounded-full bg-accent py-3 text-base font-black uppercase tracking-[0.14em] text-accent-foreground shadow-3d transition-all hover:scale-[1.02] hover:bg-accent/90 hover:shadow-3d-hover sm:h-14 sm:text-lg md:h-16 md:text-xl">
                     Send Inquiry
                     <Send className="ml-3 h-6 w-6" />
                   </Button>
@@ -140,8 +142,8 @@ export default function ContactPage() {
 
         {/* Map Section */}
         <section className="mt-12 sm:mt-16 md:mt-20">
-          <div className="glass-morphism-strong rounded-[4rem] border-2 border-white/10 shadow-3d overflow-hidden">
-            <div className="px-8 md:px-14 pt-10 md:pt-14 pb-8 md:pb-10">
+          <div className="glass-morphism-strong overflow-hidden rounded-[2rem] border border-white/15 shadow-3d sm:rounded-[2.5rem] md:rounded-[3rem]">
+            <div className="px-6 pb-7 pt-8 sm:px-8 sm:pb-8 sm:pt-10 md:px-12 md:pb-10 md:pt-12">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center shadow-3d">
@@ -149,7 +151,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-black tracking-[0.3em] uppercase text-muted-foreground">Find Us</p>
-                    <h3 className="text-3xl md:text-4xl font-serif font-bold text-high-contrast">Bengaluru Office</h3>
+                    <h3 className="text-3xl font-bold text-high-contrast md:text-4xl">Bengaluru Office</h3>
                   </div>
                 </div>
 
@@ -168,14 +170,14 @@ export default function ContactPage() {
                 </Button>
               </div>
 
-              <p className="mt-6 text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">
+              <p className="mt-5 max-w-4xl text-sm leading-relaxed text-muted-foreground md:text-base">
                 2nd Floor, Om Shakthi 57 Complex, Hosur Road, Garebhavipalya, Bengaluru, Karnataka – 560068, India
               </p>
             </div>
 
             <div className="relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.12),transparent_55%)]" />
-              <div className="relative aspect-video w-full overflow-hidden rounded-2xl min-h-[300px] sm:min-h-[400px]">
+              <div className="relative aspect-video min-h-[280px] w-full overflow-hidden rounded-2xl sm:min-h-[360px] md:min-h-[400px]">
                 <iframe
                   title="Happy Feet Holidays & Resorts - Bengaluru Location"
                   src="https://www.google.com/maps?q=12.8979524,77.6341038&z=18&output=embed"
@@ -185,7 +187,7 @@ export default function ContactPage() {
                   allowFullScreen
                 />
                 {/* Custom Google Maps UI Overlay */}
-                <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-auto w-11/12 sm:w-72 max-w-sm">
+                <div className="pointer-events-auto absolute bottom-3 left-1/2 w-[94%] max-w-sm -translate-x-1/2 transform sm:bottom-6 sm:w-80">
                   <div className="bg-white rounded-lg shadow-lg p-2 sm:p-3 w-full border border-gray-200">
                     <div className="flex items-start gap-3">
                       <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-100 rounded flex items-center justify-center flex-shrink-0 mt-0.5">

@@ -12,7 +12,7 @@ const sections = [
           cookies and similar technologies when you visit our website.
         </p>
         <p className="mt-4">
-          Cookies help us deliver a premium browsing experience, understand site performance, and improve our services.
+          Cookies help us deliver a smoother browsing experience, understand site performance, and improve our services.
         </p>
       </>
     ),
@@ -151,7 +151,7 @@ export default function CookiesPage() {
               Cookie Policy
             </h1>
             <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed">
-              A transparent look at how cookies help us deliver a world-class experience.
+              A transparent look at how cookies help us deliver a better browsing experience.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:items-center">

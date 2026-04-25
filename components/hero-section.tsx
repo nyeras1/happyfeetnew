@@ -1,107 +1,121 @@
 "use client"
 
-import { useCallback, useRef, useState } from "react"
-import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, MapPin } from "lucide-react"
-import { HeroScrollCanvas } from "@/components/hero-scroll-canvas"
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { ArrowRight, PhoneCall } from "lucide-react"
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isFirstFrameReady, setIsFirstFrameReady] = useState(false)
+  const phrase = "Happy Feet"
+  const eeStart = phrase.indexOf("ee")
+  const [typedText, setTypedText] = useState("")
+  const [isDeleting, setIsDeleting] = useState(false)
 
-  // Track scroll progress of the container (0 to 1)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  })
+  useEffect(() => {
+    let timeoutId: number
 
-  // Transform scroll progress for different text animations
-  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 0, 0])
-  const y1 = useTransform(scrollYProgress, [0, 0.2], [0, -50])
+    timeoutId = window.setTimeout(
+      () => {
+        if (!isDeleting && typedText.length < phrase.length) {
+          setTypedText(phrase.slice(0, typedText.length + 1))
+          return
+        }
 
-  const opacity2 = useTransform(scrollYProgress, [0.3, 0.4, 0.6, 0.7], [0, 1, 1, 0])
-  const scale2 = useTransform(scrollYProgress, [0.3, 0.6], [0.9, 1.1])
+        if (!isDeleting && typedText.length === phrase.length) {
+          setIsDeleting(true)
+          return
+        }
 
-  const opacity3 = useTransform(scrollYProgress, [0.7, 0.8, 1], [0, 1, 1])
-  const y3 = useTransform(scrollYProgress, [0.7, 1], [50, 0])
+        if (isDeleting && typedText.length > 0) {
+          setTypedText(typedText.slice(0, -1))
+          return
+        }
 
-  const [currentProgress, setCurrentProgress] = useState(0)
+        if (isDeleting && typedText.length === 0) {
+          setIsDeleting(false)
+        }
+      },
+      !isDeleting && typedText.length === phrase.length ? 1200 : isDeleting ? 55 : 95,
+    )
 
-  const handleFirstFrameReady = useCallback(() => {
-    setIsFirstFrameReady(true)
-  }, [])
-
-  useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
-    setCurrentProgress(latest)
-  })
+    return () => window.clearTimeout(timeoutId)
+  }, [typedText, isDeleting, phrase])
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <HeroScrollCanvas scrollProgress={currentProgress} onFirstFrameReady={handleFirstFrameReady} />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
-
-        {isFirstFrameReady && (
-          <motion.div
-            style={{ opacity: opacity1, y: y1 }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-24 sm:pt-28 md:pt-0"
-          >
-            <div className="max-w-5xl space-y-5 sm:space-y-8">
-              <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif font-black leading-[0.95] sm:leading-[0.9] tracking-tight text-white drop-shadow-2xl">
-                Travel the <br />
-                <span className="text-accent italic">World</span> with <br />
-                Happy Feet
-              </h1>
-              <p className="text-base sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto font-light tracking-wide">
-                Drag down to begin your journey.
-              </p>
-            </div>
-          </motion.div>
-        )}
-
-        {isFirstFrameReady && (
-          <motion.div
-            style={{ opacity: opacity2, scale: scale2 }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none pt-24 sm:pt-28 md:pt-0"
-          >
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white tracking-[0.25em] sm:tracking-widest uppercase text-shadow-strong text-center px-4">
-              One World.<br />Endless Paths.
-            </h2>
-          </motion.div>
-        )}
-
-        {isFirstFrameReady && (
-          <motion.div
-            style={{ opacity: opacity3, y: y3 }}
-            className="absolute inset-0 flex flex-col items-center justify-center z-10 pt-24 sm:pt-28 md:pt-0"
-          >
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-sans font-bold text-white mb-8 tracking-tighter shadow-black drop-shadow-lg text-center px-4">
-              Travel beyond <br />destinations.
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-6">
-              <Button
-                size="lg"
-                className="h-14 px-8 rounded-full bg-white text-black hover:bg-white/90 font-bold uppercase tracking-widest text-sm shadow-xl hover:scale-105 transition-transform"
-              >
-                Start Exploring
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </motion.div>
-        )}
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <div className="w-[1px] h-16 bg-white/20">
-            <motion.div
-              style={{ height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
-              className="w-full bg-accent"
-            />
-          </div>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-white/50">Scroll</span>
-        </div>
+    <section className="relative isolate min-h-screen overflow-hidden bg-black">
+      <div className="absolute inset-0">
+        <Image
+          src="/canvas%20images/herosection.png"
+          alt="Travel destinations collage"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,255,255,0.48),rgba(255,255,255,0.2)_40%,rgba(0,0,0,0.2)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.38)_0%,rgba(0,0,0,0.16)_45%,rgba(0,0,0,0.42)_100%)]" />
       </div>
-    </div>
+
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-10 pt-60 sm:px-6 sm:pb-12 sm:pt-44 md:pt-32 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="mx-auto mt-6 w-full max-w-5xl sm:mt-8"
+        >
+          <div className="text-center">
+            <h1 className="text-[2rem] font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.35)] sm:text-5xl md:text-6xl">
+              Travel the World with{" "}
+              <span className="inline-block font-black uppercase tracking-[0.02em] text-[#2da8ff]">
+                <span>{typedText.slice(0, eeStart).replace(" ", "\u00A0")}</span>
+                <span className="text-[#ff2f92]">{typedText.slice(eeStart, eeStart + 2)}</span>
+                <span>{typedText.slice(eeStart + 2).replace(" ", "\u00A0")}</span>
+                <motion.span
+                  aria-hidden="true"
+                  className="ml-0.5 inline-block h-[0.95em] w-[2px] bg-[#2da8ff] align-[-0.08em]"
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                />
+              </span>
+            </h1>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="mx-auto mt-auto w-full max-w-5xl"
+        >
+          <p className="mx-auto max-w-4xl text-center text-base font-bold leading-relaxed tracking-[-0.01em] text-black/85 sm:text-lg md:text-xl">
+            Beautifully curated experiences, trusted planning, and seamless support
+            <br className="hidden sm:block" /> from the first idea to your final memory.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.72, delay: 0.1, ease: "easeOut" }}
+          className="mx-auto mt-[38px] flex w-full max-w-5xl items-end justify-between gap-4"
+        >
+          <Link
+            href="/destinations"
+            className="inline-flex items-center px-1 py-1 text-lg font-black tracking-[0.02em] text-black transition-colors hover:text-black/75 sm:text-xl"
+          >
+            Explore Destinations
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center px-1 py-1 text-lg font-black tracking-[0.02em] text-black transition-colors hover:text-black/75 sm:text-xl"
+          >
+            Talk to Expert
+            <PhoneCall className="ml-2 h-5 w-5" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
   )
 }

@@ -105,7 +105,7 @@ export default function PressPage() {
               Press & Media
             </h1>
             <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed">
-              Assets, boilerplate, and contact info — designed for a world-class editorial experience.
+              Assets, boilerplate, and contact details for journalists and collaborators.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:items-center">
@@ -199,9 +199,9 @@ export default function PressPage() {
                   </div>
 
                   <div className="mt-6 rounded-3xl border border-white/10 bg-black/25 p-6">
-                    <p className="text-xs font-black tracking-[0.22em] uppercase text-white/70">Note</p>
+                    <p className="text-xs font-black tracking-[0.22em] uppercase text-white/70">Heads up</p>
                     <p className="mt-2 text-sm sm:text-base text-white/75 leading-relaxed">
-                      This page is an informational press kit. For bookings or support, please use the Contact page.
+                      This is an informational press page. For travel assistance, please use the Contact page.
                     </p>
                   </div>
                 </div>

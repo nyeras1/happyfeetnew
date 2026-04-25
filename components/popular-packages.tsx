@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Clock, MapPin, Tag } from "lucide-react"
 
@@ -12,7 +13,6 @@ export function PopularPackages() {
     {
       title: "Corporate Day Outing",
       image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=800",
-      price: "$299",
       duration: "1 Day",
       location: "Luxury Resorts",
       category: "Corporate",
@@ -20,7 +20,6 @@ export function PopularPackages() {
     {
       title: "Alpine Adventure Tour",
       image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800",
-      price: "$899",
       duration: "5 Days",
       location: "Swiss Alps",
       category: "Adventure",
@@ -28,7 +27,6 @@ export function PopularPackages() {
     {
       title: "Cultural Heritage Walk",
       image: "/Cultural Heritage Walk.jpg",
-      price: "$599",
       duration: "3 Days",
       location: "Ancient Cities",
       category: "Cultural",
@@ -50,11 +48,11 @@ export function PopularPackages() {
             <Tag className="h-4 w-4 text-accent" />
             <span className="text-xs font-black tracking-[0.3em] text-accent uppercase">The Collection</span>
           </div>
-          <h3 className="text-4xl sm:text-6xl md:text-8xl font-serif font-bold tracking-tighter text-high-contrast">
+          <h3 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter text-high-contrast">
             Curated Escapes
           </h3>
           <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Handpicked experiences designed to create unforgettable memories
+            Handpicked experiences designed for meaningful memories
           </p>
         </div>
 
@@ -102,21 +100,18 @@ export function PopularPackages() {
                 </div>
 
                 {/* Title with strong shadow */}
-                <h4 className="text-3xl sm:text-4xl font-serif font-bold mb-4 text-white text-shadow-strong leading-tight">
+                <h4 className="text-3xl sm:text-4xl font-bold mb-4 text-white text-shadow-strong leading-tight">
                   {pkg.title}
                 </h4>
 
-                {/* Price with high contrast */}
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-sm text-white/80 font-semibold uppercase tracking-wider">From</span>
-                  <span className="text-3xl sm:text-4xl font-bold text-accent">{pkg.price}</span>
-                  <span className="text-sm text-white/80 font-semibold">per person</span>
-                </div>
+                <p className="text-sm text-white/80 font-semibold mb-6 uppercase tracking-wider">Tailored to your travel vibe</p>
 
                 {/* CTA Button with 3D effect */}
-                <Button className="w-full h-14 rounded-2xl bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-accent hover:text-accent-foreground transition-all shadow-3d hover:shadow-3d-hover group/btn">
-                  View Experience
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
+                <Button asChild className="w-full h-14 rounded-2xl bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-accent hover:text-accent-foreground transition-all shadow-3d hover:shadow-3d-hover group/btn">
+                  <Link href="/contact">
+                    View Experience
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
               </div>
             </div>

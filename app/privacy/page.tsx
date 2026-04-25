@@ -347,7 +347,7 @@ export default function PrivacyPage() {
               Privacy Policy
             </h1>
             <p className="mt-4 text-sm sm:text-base text-white/70 leading-relaxed">
-              Happy Feet Holidays & Resorts — world-class travel experiences with a concierge-first approach.
+              Happy Feet Holidays & Resorts — clear data care with a concierge-first approach.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:items-center">

@@ -72,7 +72,7 @@ const styles: Array<{ key: TravelStyle; title: string; subtitle: string }> = [
   { key: "family", title: "Family", subtitle: "Comfort-first togetherness" },
   { key: "friends", title: "Friends", subtitle: "Shared adventures" },
   { key: "solo", title: "Solo", subtitle: "Curated, mindful journeys" },
-  { key: "corporate", title: "Corporate", subtitle: "Seamless work + unwind" },
+  { key: "corporate", title: "Corporate", subtitle: "Smooth work + unwind" },
 ]
 
 export default function BookPage() {
@@ -219,7 +219,6 @@ export default function BookPage() {
           <div className="flex flex-col lg:flex-row items-start justify-between gap-4 lg:gap-6">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 backdrop-blur-xl">
-                <Sparkles className="h-4 w-4 text-[#FFD93D]" />
                 <span className="text-xs font-black tracking-[0.28em] text-white/90 uppercase">Book Your World</span>
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold tracking-tight leading-[0.95]">
@@ -565,7 +564,7 @@ export default function BookPage() {
                           <div className="space-y-6">
                             <div>
                               <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight">Anything you’d like us to know?</h2>
-                              <p className="mt-1 text-sm sm:text-base text-white/70">Optional notes — preferences, budget, must-see places.</p>
+                              <p className="mt-1 text-sm sm:text-base text-white/70">Optional notes — preferences, must-see places, special requests.</p>
                             </div>
 
                             <div className="space-y-2">
@@ -578,7 +577,7 @@ export default function BookPage() {
                                   "w-full rounded-2xl bg-black/30 border border-white/15 px-4 py-3",
                                   "text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-[#FFD93D]/30",
                                 )}
-                                placeholder="Tell us what would make this journey perfect"
+                                placeholder="Tell us what would make this journey special"
                               />
                               <p className="text-xs text-white/45">Optional • {draft.notes.length}/400</p>
                             </div>
@@ -635,10 +634,10 @@ export default function BookPage() {
 
               <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <Button asChild variant="outline" className="flex-1 sm:flex-none border-white/20 bg-transparent text-white hover:bg-white hover:text-black">
-                  <Link href="/destinations">Explore</Link>
+                  <Link href="/destinations">Explore Destinations</Link>
                 </Button>
                 <Button onClick={() => window.open('tel:+919742997421')} className="flex-1 sm:flex-none bg-[#FF6B35] hover:bg-[#FF6B35]/90 text-white">
-                  Talk to Expert
+                  Talk to Travel Expert
                 </Button>
               </div>
 

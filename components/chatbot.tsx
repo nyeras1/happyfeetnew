@@ -20,7 +20,7 @@ type ChatContext = {
   destination?: string
   monthOrDates?: string
   travelers?: string
-  budget?: string
+  preferences?: string
 }
 
 function normalize(text: string) {
@@ -75,20 +75,10 @@ function extractMonthOrDates(text: string) {
   return undefined
 }
 
-function extractBudget(text: string) {
+function extractPreferences(text: string) {
   const t = normalize(text)
-  if (!/(budget|price|cost|inr|rs|₹|lakh|lakhs|k)\b/i.test(t) && !/\b\d{2,}\b/.test(t)) return undefined
-
-  const range = text.match(/(?:₹|rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*(k|lakh|lakhs)?\s*(?:to|\-|–)\s*(?:₹|rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*(k|lakh|lakhs)?/i)
-  if (range) return cleanValue(range[0])
-
-  const single = text.match(/(?:₹|rs\.?|inr)\s*\d+[\d,.]*\s*(?:k|lakh|lakhs)?/i)
-  if (single) return cleanValue(single[0])
-
-  const plain = text.match(/\b\d+[\d,.]*\s*(?:k|lakh|lakhs)\b/i)
-  if (plain) return cleanValue(plain[0])
-
-  return undefined
+  if (!/(luxury|premium|comfort|family-friendly|adventure|relaxed)\b/i.test(t)) return undefined
+  return cleanValue(text)
 }
 
 function extractTravelers(text: string) {
@@ -148,13 +138,13 @@ function updateContextFromUserText(prev: ChatContext, userText: string): ChatCon
   const destination = extractDestination(userText)
   const monthOrDates = extractMonthOrDates(userText)
   const travelers = extractTravelers(userText)
-  const budget = extractBudget(userText)
+  const preferences = extractPreferences(userText)
 
   if (tripType) next.tripType = tripType
   if (destination) next.destination = destination
   if (monthOrDates) next.monthOrDates = monthOrDates
   if (travelers) next.travelers = travelers
-  if (budget) next.budget = budget
+  if (preferences) next.preferences = preferences
 
   return next
 }
@@ -174,7 +164,7 @@ function buildBotReply(userTextRaw: string, ctx: ChatContext) {
   const greet = /(hi|hello|hey|good\s*morning|good\s*evening|good\s*afternoon)/i.test(userText)
   const thanks = /(thanks|thank you|thx)/i.test(userText)
   const contact = /(call|phone|number|whatsapp|contact|support)/i.test(userText)
-  const price = /(price|cost|budget|expensive|cheap|rate|package\s*price)/i.test(userText)
+  const details = /(details|inclusions|options|availability|package)/i.test(userText)
   const book = /(book|booking|reserve|reservation|buy)/i.test(userText)
   const refund = /(refund|cancellation|cancel|return)/i.test(userText)
   const packages = /(package|packages|tour|itinerary|plan)/i.test(userText)
@@ -187,14 +177,14 @@ function buildBotReply(userTextRaw: string, ctx: ChatContext) {
   if (greet) {
     return pick([
       "Hello! Welcome to Happy Feet. Where would you like to travel — India or international?",
-      "Hey! I can help you pick a destination and a package. What kind of trip are you planning (family, couple, friends, corporate)?",
+      "Hey! I can help you pick a destination and journey style. What kind of trip are you planning (family, couple, friends, corporate)?",
       "Hi there! Tell me your preferred destination (or vibe like beach/mountains) and your rough travel dates.",
     ])
   }
 
   if (thanks) {
     return pick([
-      "You’re welcome! Want me to suggest a few options based on your budget and dates?",
+      "You’re welcome! Want me to suggest a few options based on your vibe and dates?",
       "Anytime. Tell me the destination (or beach/mountains) and I’ll guide you.",
       "Glad to help. Would you like to book now or explore destinations first?",
     ])
@@ -205,23 +195,23 @@ function buildBotReply(userTextRaw: string, ctx: ChatContext) {
   }
 
   if (refund) {
-    return "Refunds and cancellations depend on the airline/hotel/bus/tour policy. You can read our Refund & Cancellation Policy here: /refund. If you share your booking type (flight/hotel/package) and travel date, I’ll tell you what usually applies."
+    return "Refunds and cancellations depend on the airline/hotel/bus/tour policy. You can read our Refund & Cancellation Policy here: /refund. If you share your booking type and travel date, I will guide you clearly."
   }
 
   if (book) {
-    return "Great — I can help you book. Quick questions: 1) destination, 2) travel dates, 3) number of travelers, 4) budget range."
+    return "Great — I can help you book. Quick questions: 1) destination, 2) travel dates, 3) number of travelers, 4) travel preference."
   }
 
-  if (price) {
-    return "Pricing depends on destination, dates, and hotel category. Share your destination + travel month + budget range, and I’ll suggest the best-fit options."
+  if (details) {
+    return "Trip details depend on destination, dates, and hotel category. Share your destination + travel month + preference, and I will suggest the best-fit options."
   }
 
   if (honeymoon) {
-    return "Honeymoon trip — love that. Do you prefer beach luxury (Maldives/Bali/Goa) or scenic escapes (Kerala/Coorg)? Also share your travel month and budget range."
+    return "Honeymoon trip — love that. Do you prefer beach luxury (Maldives/Bali/Goa) or scenic escapes (Kerala/Coorg)? Also share your travel month and preference."
   }
 
   if (family) {
-    return "Family trip — perfect. How many adults and kids, and what dates are you considering? I can suggest family-friendly stays and activities."
+    return "Family trip — lovely. How many adults and kids, and what dates are you considering? I can suggest family-friendly stays and activities."
   }
 
   if (corporate) {
@@ -237,14 +227,14 @@ function buildBotReply(userTextRaw: string, ctx: ChatContext) {
   }
 
   if (packages) {
-    return "We have curated packages and we also customize. Tell me your destination (or vibe), dates, and budget — I’ll guide you to the right option."
+    return "We have curated journeys and we also customize. Tell me your destination (or vibe), dates, and preference — I will guide you to the right option."
   }
 
   const missing = {
     destination: !ctx.destination,
     monthOrDates: !ctx.monthOrDates,
     travelers: !ctx.travelers,
-    budget: !ctx.budget,
+    preferences: !ctx.preferences,
   }
 
   const tripSummaryParts = [
@@ -252,25 +242,25 @@ function buildBotReply(userTextRaw: string, ctx: ChatContext) {
     ctx.destination ? `to ${ctx.destination}` : undefined,
     ctx.monthOrDates ? `around ${ctx.monthOrDates}` : undefined,
     ctx.travelers ? `for ${ctx.travelers}` : undefined,
-    ctx.budget ? `budget: ${ctx.budget}` : undefined,
+    ctx.preferences ? `preference: ${ctx.preferences}` : undefined,
   ].filter(Boolean)
 
   if (tripSummaryParts.length >= 2) {
-    if (missing.destination || missing.monthOrDates || missing.travelers || missing.budget) {
+    if (missing.destination || missing.monthOrDates || missing.travelers || missing.preferences) {
       const ask =
         (missing.destination && "Which destination are you considering?") ||
         (missing.monthOrDates && "What are your travel dates or month?") ||
         (missing.travelers && "How many people are traveling?") ||
-        (missing.budget && "What budget range are you comfortable with?")
+        (missing.preferences && "What kind of stay or experience are you looking for?")
 
       return `Got it — ${tripSummaryParts.join(", ")}. ${ask}`
     }
 
-    return `Perfect — ${tripSummaryParts.join(", ")}. Would you like premium luxury stays or value-for-money options with great experiences?`
+    return `Great — ${tripSummaryParts.join(", ")}. Would you like premium stays or relaxed comfort options?`
   }
 
   return pick([
-    "Got it. To suggest the best option, tell me your destination (or beach/mountains), travel dates, and budget range.",
+    "Got it. To suggest the best option, tell me your destination (or beach/mountains), travel dates, and preference.",
     "Understood. Are you planning a family trip, couple trip, or friends trip? Also share your travel month.",
     "I can help with that. What’s your destination and how many people are traveling?",
   ])
@@ -279,7 +269,7 @@ function buildBotReply(userTextRaw: string, ctx: ChatContext) {
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: "bot", text: "Hello! How can I help you plan your dream vacation today?" },
+    { role: "bot", text: "Hello! How can I help you plan your next beautiful trip today?" },
   ])
   const [inputValue, setInputValue] = useState("")
   const [isTyping, setIsTyping] = useState(false)

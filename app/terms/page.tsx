@@ -79,9 +79,9 @@ const sections = [
       <>
         <ul className="list-disc pl-6 space-y-2">
           <li>Bookings are confirmed only after full payment and confirmation email/SMS.</li>
-          <li>Prices are dynamic and subject to change until payment is completed.</li>
+          <li>Booking details are dynamic and subject to change until confirmation is completed.</li>
           <li>
-            Errors in pricing due to technical issues may be corrected, and bookings may be cancelled with refund.
+            Errors in displayed booking details due to technical issues may be corrected, and bookings may be cancelled with refund.
           </li>
           <li>Travel itineraries must be reviewed carefully by the user.</li>
         </ul>
@@ -90,12 +90,12 @@ const sections = [
   },
   {
     id: "payments",
-    title: "6. Pricing & Payments",
+    title: "6. Booking Confirmation & Payments",
     content: (
       <>
         <ul className="list-disc pl-6 space-y-2">
-          <li>All prices are displayed in Indian Rupees (INR) unless stated otherwise.</li>
-          <li>Taxes, service fees, and convenience charges may apply.</li>
+          <li>All booking amounts are displayed in Indian Rupees (INR) unless stated otherwise.</li>
+          <li>Applicable taxes and service terms may apply.</li>
           <li>
             Payments must be made via approved payment methods (UPI, cards, net banking, wallets).
           </li>
@@ -134,7 +134,7 @@ const sections = [
         <p>Changes to bookings (date change, passenger name correction, etc.):</p>
         <ul className="mt-4 list-disc pl-6 space-y-2">
           <li>Are subject to supplier policies</li>
-          <li>May incur additional charges</li>
+          <li>May require additional payment based on supplier policy</li>
         </ul>
         <p className="mt-4">Happy Feet is not responsible for fare differences imposed by service providers.</p>
       </>
@@ -171,7 +171,7 @@ const sections = [
           <li>Force majeure events</li>
           <li>Service provider negligence</li>
         </ul>
-        <p className="mt-4">Our maximum liability shall not exceed the service fee charged by us for the booking.</p>
+        <p className="mt-4">Our maximum liability shall not exceed the booking amount received by us for the booking.</p>
       </>
     ),
   },
